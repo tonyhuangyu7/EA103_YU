@@ -17,7 +17,7 @@ div.main_content {
 	font-size: 0;
 }
 
-aside.aside {
+div.aside {
 	width: 250px;
 	display: inline-block;
 	vertical-align: top;
@@ -31,7 +31,30 @@ div.firstLine{
 	height: 100px;
 }
 
-main.main {
+div.r1 {
+	display: inline-block;
+	position: relative;
+	top: -20px;
+	margin: 10px auto;
+	margin-left: 10px;
+}
+
+div.msg {
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+div.cross{
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	top: -15px;
+	right: -12px;
+}
+
+div.main {
 	width: calc(100% - 250px - 10px);
 	display: inline-block;
 	vertical-align: top;
@@ -46,42 +69,35 @@ div.rheader {
 	text-align: center;
 }
 
-h1 {
-	margin: 5px auto;
-}
-
-div.content {
-	height: 920px;
-}
-
-div.r1 {
-	display: inline-block;
-	position: relative;
-	top: -20px;
-	margin: 10px auto;
-	margin-left: 10px;
-}
-
-div.msg {
-	display: inline-block;
-	margin-top: 10px;
-	margin-left: 10px
-}
-
 button#bigOne {
 	display: inline-block;
 	position: relative;
-	top: -20px;
+	right: 250px;
+	top: -10px;
 	border-radius: 10px;
-	margin-left: 10px;
 	height: 30px;
 	padding: 1px 6px;
+	cursor: pointer;
 }
 
 button#smallOne {
 	display: none;
 	padding: 1px 6px;
 }
+
+
+h1 {
+	margin: 0px auto;
+}
+
+div.title {
+	display: inline-block;
+}
+
+div.content {
+	height: 920px;
+}
+
 
 div.bottom {
 	padding: 10px;
@@ -100,11 +116,11 @@ div.me div, div.manager div {
 }
 
 @media screen and (max-width: 1200px) {
-	aside.aside {
+	div.aside {
 		width: 100%;
 		margin-bottom: 10px;
 	}
-	aside.aside, main.main, div.rheader {
+	div.aside, div.main, div.rheader {
 		width: 100%;
 		display: block;
 	}
@@ -126,6 +142,10 @@ div.me div, div.manager div {
 		top: 45px;
 		right: 40px;
 		border-radius: 10px;
-		height: 30px;
+		height: 30px;		
+		cursor: pointer;
+	}
+	div.cross{
+		display: none;
 	}
 }

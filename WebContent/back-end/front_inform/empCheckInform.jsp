@@ -58,7 +58,7 @@ th, td {
 </head>
 <body bgcolor='white'>
 	<div class="main_content">
-		<aside class="aside">
+		<div class="aside">
 			<div class="firstLine">
 				<div class="r1" style="font-size: 20px; font-weight: 900;">
 					EMP0009</div>
@@ -66,22 +66,9 @@ th, td {
 					<img src="<%=request.getContextPath()%>/back-end/images/help.png"
 						alt="">
 				</div>
-				<button id="bigOne" style="line-height: 2;">
-					<svg width="1em" height="1em" viewBox="0 0 16 16"
-						class="bi bi-list" fill="currentColor"
-						xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-							d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-				</button>
-				<button id="smallOne" style="line-height: 2;">
-					<svg width="1em" height="1em" viewBox="0 0 16 16"
-						class="bi bi-list" fill="currentColor"
-						xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-							d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-				</button>
+				<div class="cross">
+					<img src="<%=request.getContextPath()%>/back-end/images/cross.png">
+				</div>
 			</div>
 			<div class="bottom">
 				<div class="me">
@@ -120,10 +107,26 @@ th, td {
 					<div>食材消耗統計</div>
 				</div>
 			</div>
-		</aside>
-		<main class="main">
+		</div>
+		<div class="main">
 			<div class="rheader">
-				<h1>吃 Pot 吧！員工專區</h1>
+				<button id="bigOne" style="line-height: 2;">
+					<svg width="1em" height="1em" viewBox="0 0 16 16"
+						class="bi bi-list" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+							d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+				</button>
+				<button id="smallOne" style="line-height: 2;">
+					<svg width="1em" height="1em" viewBox="0 0 16 16"
+						class="bi bi-list" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+							d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+				</button>
+				<div class="title"><h1>吃 Pot 吧！員工專區</h1></div>
 			</div>
 			<div class="content">
 				<table id="table-1">
@@ -178,7 +181,7 @@ th, td {
 				</table>
 				<%@ include file="page2.file"%>
 			</div>
-		</main>
+		</div>
 	</div>
 	<script src="<%=request.getContextPath()%>/back-end/js/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/back-end/js/jquery-migrate-3.0.1.min.js"></script>
