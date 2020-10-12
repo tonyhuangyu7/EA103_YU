@@ -1,7 +1,3 @@
-/*
-    DEMO STYLE
-*/
-
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
@@ -94,11 +90,10 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #7386D5 !important;
+    background: #fff !important;
 }
 
-#sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
@@ -134,15 +129,10 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a#logIn {
-    background: #fff;
-    color: #7386D5;
-}
-
-a#logOut,
-a#logOut:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
+a#logIn,
+a#logOut {
+    background: #6d7fcc/* !important*/;
+    color: #fff/* !important*/;
 }
 
 /* ---------------------------------------------------
@@ -163,6 +153,11 @@ a#logOut:hover {
     width: 100%;
 }
 
+ul#pageSubmenuTop, ul#homeSubmenuTop {
+	background: #fff;
+	color: #000;
+}
+
 button {
 	width: 40;
 	height: 38;
@@ -177,7 +172,7 @@ button {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
-    #sidebar, #sidebarCollapse, #sidebarCollapse span {
+    #sidebar, #sidebarCollapse, #sidebarCollapse span, #titleBig {
     	display: none;
     }
     #sidebar.active {
@@ -186,7 +181,8 @@ button {
     #content, #content.active {
         width: 100%;
     }
-	#rwdShow {
+	#rwdShow, #titleSmall {
 		display: inline-block;
+		vertical-align: middle;
 	}
 }
