@@ -46,7 +46,7 @@
 				<!-- 員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
 			</div>
 
-			<ul class="sidebarFunc">
+			<ul class="list-unstyled components">
 				<li><a href="#">現場點餐</a></li>
 				<li><a href="#">現場劃位</a></li>
 				<li><a href="#">訂單結帳</a></li>
@@ -70,7 +70,7 @@
 				</li>
 				<li><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">一般員工專區</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
-						<li><a href="#">查看通知</a></li>
+						<li><a href="<%=request.getContextPath()%>/back-end/front_inform/empCheckInform_New.jsp">查看通知</a></li>
 						<li><a href="#">訂單派工</a></li>
 						<li><a href="#">出餐管理</a></li>
 						<li><a href="#">訂餐訂單處理</a></li>
@@ -80,6 +80,7 @@
 					</ul>
 				</li>
 			</ul>
+
 			<ul class="list-unstyled CTAs">
 				<li><a href="#" id="logIn">Log in</a></li>
 				<li><a href="#" id="logOut">Log out</a></li>
@@ -118,35 +119,8 @@
 								<li class="nav-item active"><a class="nav-link" href="#">現場劃位</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">訂單結帳</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">候位管理</a></li>
-								<li class="nav-item active"><a class="nav-link" href="#">主管員工專區</a>
-									<!-- <ul class="collapse list-unstyled" id="pageSubmenuTop">
-										<li><a href="#">員工管理</a></li>
-										<li><a href="#">會員管理</a></li>
-										<li><a href="#">廣告管理</a></li>
-										<li><a href="#">最新消息管理</a></li>
-										<li><a href="#">通知管理</a></li>
-										<li><a href="#">評價管理</a></li>
-										<li><a href="#">用餐時段管理</a></li>
-										<li><a href="#">桌位管理</a></li>
-										<li><a href="#">菜單管理</a></li>
-										<li><a href="#">食材管理</a></li>
-										<li><a href="#">餐點組成管理</a></li>
-										<li><a href="#">食材消耗統計</a></li>
-										<li><a href="#">紅利商品管理</a></li>
-									</ul> -->
-								</li>
-								<li class="nav-item active"><a class="nav-link" href="#">一般員工專區</a>
-									<!-- <ul class="collapse list-unstyled" id="homeSubmenuTop">
-										<li><a href="#">查看通知</a></li>
-										<li><a href="#">訂單派工</a></li>
-										<li><a href="#">出餐管理</a></li>
-										<li><a href="#">訂餐訂單處理</a></li>
-										<li><a href="#">訂餐管理</a></li>
-										<li><a href="#">訂單管理</a></li>
-										<li><a href="#">訂位管理</a></li>
-									</ul> -->
-								</li>
-								</li>
+								<li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/back-index_m.jsp">主管員工專區</a></li>
+								<li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/back-index_e.jsp">一般員工專區</a></li>
 								<li class="nav-item active"><div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; border-radius: 5px; background: #6d7fcc; color: #fff; cursor: pointer;">Log in</div>
 									<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #6d7fcc; color: #fff; cursor: pointer;">Log out</div></li>
 							</ul>
@@ -155,54 +129,21 @@
 				</div>
 			</nav>
 
-			<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
-
+			<h3 style="font-weight: 900; display: inline-block;">吃 Pot 吧 ! 員工守則</h3>
+			<ol>
+				<li style="margin-top: 15px;">須守時盡責</li>
+				<li style="margin-top: 15px;">遵顧客至上</li>
+				<li style="margin-top: 15px;">常微笑待人</li>
+				<li style="margin-top: 15px;">要不辭勞苦</li>
+				<li style="margin-top: 15px;">懂臨機應變</li>
+				<li style="margin-top: 15px; margin-bottom: 25px;">熟練鐵沙掌</li>
+			</ol>
 			<div class="line"></div>
-
-			<h2>Lorem Ipsum Dolor</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
-
-			<div class="line"></div>
-
-			<h2>Lorem Ipsum Dolor</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
-
-			<div class="line"></div>
-
-			<h3>Lorem Ipsum Dolor</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-				reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-				pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-				culpa qui officia deserunt mollit anim id est laborum.</p>
+			<h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
+			<div class="leader" style="cursor: default;">
+				<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>EMP0009</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>詹詠祺</span></h4>
+				<!-- random 的員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
+			</div>
 		</div>
 	</div>
 

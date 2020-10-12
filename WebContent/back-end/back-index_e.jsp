@@ -2,29 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.front_inform.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
-<%
-	Front_InformService front_informSvc = new Front_InformService();
-	List<Front_InformVO> list = front_informSvc.getAllInform();
-	pageContext.setAttribute("list", list);
-%>
-
+<!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<title>員工查看通知</title>
+<title>一般員工專區RWD</title>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/back-end/css/style2.css">
@@ -41,17 +33,22 @@
 	integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
 	crossorigin="anonymous"></script>
 
-
 <style>
-#table-1, #table-1 td {
-	background: #7386D5;
-    color: #fff;
-	border: 0;
-	width: 100%;
-	height: 70;
-	border-radius: 5px;
-	text-align: center;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+.employee>ul>li>a:hover{
+	color: #7b42b8;
+	text-decoration:underline;
+}
+@media (max-width: 992px) {
+	#sidebar, #sidebarCollapse, #sidebarCollapse span, #titleBig {
+		display: none;
+	}
+	#content, #content.active {
+    	width: 100%;
+	}
+	#rwdShow, #titleSmall {
+		display: inline-block;
+		vertical-align: middle;
+	}
 }
 </style>
 
@@ -149,58 +146,19 @@
 					</div>
 				</div>
 			</nav>
-
-			<h5 style="font-weight: 900; display: inline-block;">一般員工專區</h5><span> - 查看通知</span>
-			<p>
-				<table id="table-1">
-					<tr>
-						<td>
-							<h3>查看所有通知</h3>
-							<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="font-weight: 200px; color: #fff; text-decoration: none;">返回首頁</a>
-						</td>
-					</tr>
-				</table>
-				<br>
-				<%-- 錯誤表列 --%>
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-
-				<jsp:useBean id="fiSvc" scope="page" class="com.front_inform.model.Front_InformService" />
-				<table class="table table-hover" style="width: 100%; font-size: 70%;">
-					<thead style="text-align: center;">
-						<tr>
-							<th style="width: 10%;">通知編號</th>
-							<th style="width: 10%;">會員編號</th>
-							<th style="width: 10%;">訂位編號</th>
-							<th style="width: 35%;">通知內容</th>
-							<th style="width: 15%;">通知日期</th>
-							<th style="width: 10%;">通知狀態</th>
-							<th style="width: 10%;">已讀狀態</th>
-						</tr>
-					</thead>
-					<%@ include file="page1.file"%>
-					<tbody>
-					<c:forEach var="front_informVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-						<tr>
-							<td style="text-align: center;">${front_informVO.info_no}</td>
-							<td style="text-align: center;">${front_informVO.mem_no}</td>
-							<td style="text-align: center;">${front_informVO.res_no}</td>
-							<td>${front_informVO.info_cont}</td>
-							<td style="text-align: center;"><fmt:formatDate value="${front_informVO.info_date}" pattern="yyyy-MM-dd" /></td>
-							<td style="text-align: center;">${front_informVO.info_sts}</td>
-							<td style="text-align: center;">${front_informVO.read_sts}</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-				<%@ include file="page2.file"%>
-			</p>
+			<h5 style="font-weight: 900; display: inline-block;">一般員工專區</h5>
+			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-weight: 200px; color: #6d7fcc; text-decoration: none; margin-left: 10px;">返回首頁</a>			
+			<div class="employee">
+				<ul>
+					<li><a href="<%=request.getContextPath()%>/back-end/front_inform/empCheckInform_New.jsp">查看通知</a></li>
+					<li><a href="#">訂單派工</a></li>
+					<li><a href="#">出餐管理</a></li>
+					<li><a href="#">訂餐訂單處理</a></li>
+					<li><a href="#">訂餐管理</a></li>
+					<li><a href="#">訂單管理</a></li>
+					<li><a href="#">訂位管理</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
