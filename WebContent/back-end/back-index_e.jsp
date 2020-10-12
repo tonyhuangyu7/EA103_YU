@@ -75,7 +75,7 @@
 						<li><a href="#">會員管理</a></li>
 						<li><a href="#">廣告管理</a></li>
 						<li><a href="#">最新消息管理</a></li>
-						<li><a href="#">通知管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/back-end/inform_set/inform_set_New.jsp">通知管理</a></li>
 						<li><a href="#">評價管理</a></li>
 						<li><a href="#">用餐時段管理</a></li>
 						<li><a href="#">桌位管理</a></li>
@@ -114,9 +114,7 @@
 					<button type="button" id="sidebarCollapse" class="btn btn-info">
 						<i class="fas fa-align-justify"></i>
 					</button>
-					<div id="titleBig"
-						style="margin: 0 auto; font-size: 30px; font-weight: 800; cursor: default;">吃
-						Pot 吧！員工專區</div>
+					<div id="titleBig" style="margin: 0 auto; font-size: 30px; font-weight: 800;"><a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp">吃 Pot 吧！員工專區</a></div>
 					<div id="rwdShow">
 						<button type="button" id="topbarCollapse" class="btn btn-info"
 							data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -124,9 +122,7 @@
 							aria-label="Toggle navigation">
 							<i class="fas fa-align-justify"></i>
 						</button>
-						<div id="titleSmall"
-							style="padding-left: 10px; font-size: 30px; font-weight: 800; cursor: default;">吃
-							Pot 吧！員工專區</div>
+						<div id="titleSmall" style="padding-left: 10px; font-size: 30px; font-weight: 800;"><a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp">吃 Pot 吧！員工專區</a></div>
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="nav navbar-nav ml-auto">
 								<!-- 員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
@@ -147,7 +143,7 @@
 				</div>
 			</nav>
 			<h5 style="font-weight: 900; display: inline-block;">一般員工專區</h5>
-			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-weight: 200px; color: #6d7fcc; text-decoration: none; margin-left: 10px;">返回首頁</a>			
+			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #6d7fcc; text-decoration: none; margin-left: 20px;">返回首頁</a>			
 			<div class="employee">
 				<ul>
 					<li><a href="<%=request.getContextPath()%>/back-end/front_inform/empCheckInform_New.jsp">查看通知</a></li>

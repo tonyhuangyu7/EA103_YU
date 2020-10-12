@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>後台首頁</title>
+<title>通知設定</title>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
@@ -125,21 +125,22 @@
 				</div>
 			</nav>
 
-			<h3 style="font-weight: 900; display: inline-block;">吃 Pot 吧 ! 員工守則</h3>
-			<ol>
+			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定</span>
+			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #6d7fcc; text-decoration: none; margin-left: 20px;">返回首頁</a>
+			<!-- <ol>
 				<li style="margin-top: 15px;">須守時盡責</li>
 				<li style="margin-top: 15px;">遵顧客至上</li>
 				<li style="margin-top: 15px;">常微笑待人</li>
 				<li style="margin-top: 15px;">要不辭勞苦</li>
 				<li style="margin-top: 15px;">懂臨機應變</li>
 				<li style="margin-top: 15px; margin-bottom: 25px;">熟練鐵沙掌</li>
-			</ol>
-			<div class="line"></div>
-			<h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
+			</ol> -->
+			<!-- <div class="line"></div> -->
+			<%-- <h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
 			<div class="leader" style="cursor: default;">
 				<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>EMP0009</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>詹詠祺</span></h4>
 				<!-- random 的員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
-			</div>
+			</div>--%>
 		</div>
 	</div>
 
