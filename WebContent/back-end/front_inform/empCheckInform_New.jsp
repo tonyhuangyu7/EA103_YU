@@ -178,8 +178,8 @@
 							<th style="width: 10%;">通知編號</th>
 							<th style="width: 10%;">會員編號</th>
 							<th style="width: 10%;">訂位編號</th>
-							<th style="width: 35%;">通知內容</th>
-							<th style="width: 15%;">通知日期</th>
+							<th style="width: 30%;">通知內容</th>
+							<th style="width: 20%;">通知日期</th>
 							<th style="width: 10%;">通知狀態</th>
 							<th style="width: 10%;">已讀狀態</th>
 						</tr>
@@ -191,10 +191,35 @@
 							<td style="text-align: center;">${front_informVO.info_no}</td>
 							<td style="text-align: center;">${front_informVO.mem_no}</td>
 							<td style="text-align: center;">${front_informVO.res_no}</td>
-							<td>${front_informVO.info_cont}</td>
+							<td style="text-align: center;">
+								<c:choose>
+									<c:when test="${front_informVO.info_cont eq '提醒您，因您多次訂位且多次點按確認當天用餐按鈕，但皆未至本餐廳用餐，您的訂位功能將於 3 天後恢復'}">暫停訂位功能通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '提醒您，因您多次訂餐付款但皆未至本餐廳取餐，您的訂餐功能將於 3 天後恢復'}">暫停訂餐功能通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '提醒您，因您檢舉多則評價，但評價內容多數未達不當言論之標準，您的檢舉功能將於 7 天後恢復'}">暫停檢舉功能通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '提醒您，因您有多則評價被檢舉成功，您的評價功能將於 14 天後恢復'}">暫停評價功能通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '提醒您，您將於 1 分鐘後被停權'}">會員停權通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '訂位成功，點選查看訂位明細'}">訂位成功通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '訂餐成功！您尚未付款，點選前往結帳'}">訂餐成功尚未結帳</c:when>
+									<c:when test="${front_informVO.info_cont eq '您已成功付款，點選查看訂單明細'}">訂單付款成功通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '您的餐點已完成，請至本餐廳取餐'}">取餐通知</c:when>
+									<c:otherwise>當日用餐通知</c:otherwise>
+								</c:choose>
+							</td>
 							<td style="text-align: center;"><fmt:formatDate value="${front_informVO.info_date}" pattern="yyyy-MM-dd" /></td>
-							<td style="text-align: center;">${front_informVO.info_sts}</td>
-							<td style="text-align: center;">${front_informVO.read_sts}</td>
+							<td style="text-align: center;">
+								<c:choose>
+									<c:when test="${front_informVO.info_sts == 0}">一般通知</c:when>
+									<c:when test="${front_informVO.info_sts == 1}">確認用餐</c:when>
+									<c:when test="${front_informVO.info_sts == 2}">尚未回覆</c:when>
+									<c:when test="${front_informVO.info_sts == 3}">取消訂位</c:when>
+								</c:choose>
+							</td>
+							<td style="text-align: center;">
+								<c:choose>
+									<c:when test="${front_informVO.read_sts == 0}">未讀</c:when>
+									<c:when test="${front_informVO.read_sts == 1}">已讀</c:when>
+								</c:choose>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
