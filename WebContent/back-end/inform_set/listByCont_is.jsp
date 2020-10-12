@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.emp.model.*"%>
+<%@ page import="com.inform_set.model.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定</title>
+<title>通知設定管理-listByCont_is.jsp</title>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
@@ -57,7 +58,7 @@
 						<li><a href="#">會員管理</a></li>
 						<li><a href="#">廣告管理</a></li>
 						<li><a href="#">最新消息管理</a></li>
-						<li><a href="<%=request.getContextPath()%>/back-end/inform_set/inform_set_New.jsp">通知管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/back-end/inform_set/select_is.jsp">通知設定管理</a></li>
 						<li><a href="#">評價管理</a></li>
 						<li><a href="#">用餐時段管理</a></li>
 						<li><a href="#">桌位管理</a></li>
@@ -125,7 +126,7 @@
 				</div>
 			</nav>
 
-			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定</span>
+			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定管理</span>
 			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #6d7fcc; text-decoration: none; margin-left: 20px;">返回首頁</a>
 			<!-- <ol>
 				<li style="margin-top: 15px;">須守時盡責</li>

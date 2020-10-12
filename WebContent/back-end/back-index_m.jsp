@@ -75,7 +75,7 @@
 						<li><a href="#">會員管理</a></li>
 						<li><a href="#">廣告管理</a></li>
 						<li><a href="#">最新消息管理</a></li>
-						<li><a href="<%=request.getContextPath()%>/back-end/inform_set/inform_set_New.jsp">通知管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/back-end/inform_set/select_is.jsp">通知設定管理</a></li>
 						<li><a href="#">評價管理</a></li>
 						<li><a href="#">用餐時段管理</a></li>
 						<li><a href="#">桌位管理</a></li>
@@ -150,7 +150,7 @@
 					<li><a href="#">會員管理</a></li>
 					<li><a href="#">廣告管理</a></li>
 					<li><a href="#">最新消息管理</a></li>
-					<li><a href="<%=request.getContextPath()%>/back-end/inform_set/inform_set_New.jsp">通知管理</a></li>
+					<li><a href="<%=request.getContextPath()%>/back-end/inform_set/select_is.jsp">通知設定管理</a></li>
 					<li><a href="#">評價管理</a></li>
 					<li><a href="#">用餐時段管理</a></li>
 					<li><a href="#">桌位管理</a></li>
