@@ -234,6 +234,32 @@ public class Inform_SetServlet extends HttpServlet {
 			
 		}
 		
+		if("getIsForDisplayByManyConditions".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數****************************************/
+				
+				
+				/***************************2.參數轉型、開始查詢資料****************************************/
+				
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+//				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
+//				String url = "/back-end/inform_set/listByManyConditions_is.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByManyConditions_is.jsp
+//				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch(Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		if("getOneIsForUpdate".equals(action)) {
 			// 來自 listAll_is.jsp、listOne_is.jsp、listByEmp_is.jsp、listByCont_is.jsp、listByDate_is.jsp 的請求
 			
