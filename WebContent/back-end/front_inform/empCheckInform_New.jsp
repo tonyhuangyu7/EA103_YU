@@ -178,10 +178,10 @@
 							<th style="width: 10%;">通知編號</th>
 							<th style="width: 10%;">會員編號</th>
 							<th style="width: 10%;">訂位編號</th>
-							<th style="width: 30%;">通知內容</th>
+							<th style="width: 20%;">通知內容</th>
 							<th style="width: 20%;">通知日期</th>
-							<th style="width: 10%;">通知狀態</th>
-							<th style="width: 10%;">已讀狀態</th>
+							<th style="width: 15%;">通知狀態</th>
+							<th style="width: 15%;">已讀狀態</th>
 						</tr>
 					</thead>
 					<%@ include file="page1.file"%>
