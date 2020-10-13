@@ -340,10 +340,10 @@ th, td {
 			let fi_cont = document.getElementById("fi_cont");
 			if(fi_cont.style.display == "none"){
 				fi_cont.style.display = "block";
-				fi_cont.style.position = "fixed";
+				fi_cont.style.position = "absolute";
 				fi_cont.style.zIndex = '550';
 				fi_cont.style.top = '40px';
-			    fi_cont.style.right = '80px';
+			    fi_cont.style.right = '20%';
 			    fi_cont.style.fontSize = '10px';
 			    fi_cont.style.width = '400px';
 			    fi_cont.style.height = '300px';
