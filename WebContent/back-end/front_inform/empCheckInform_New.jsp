@@ -168,7 +168,7 @@
 				</c:if>
 
 				<jsp:useBean id="fiSvc" scope="page" class="com.front_inform.model.Front_InformService" />
-				<table class="table table-hover" style="width: 100%; font-size: 70%;">
+				<table class="table table-hover" style="width: 100%; font-size: 90%;">
 					<thead style="text-align: center;">
 						<tr>
 							<th style="width: 10%;">通知編號</th>
