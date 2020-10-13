@@ -44,7 +44,7 @@
 
 <style>
 #table-1, #table-1 td {
-	background: #7386D5;
+	background: #555;
     color: #fff;
 	border: 0;
 	width: 100%;
@@ -114,12 +114,12 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 
-					<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<button type="button" id="sidebarCollapse" class="btn btn-dark">
 						<i class="fas fa-align-justify"></i>
 					</button>
 					<div id="titleBig" style="margin: 0 auto; font-size: 30px; font-weight: 800;"><a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp">吃 Pot 吧！員工專區</a></div>
 					<div id="rwdShow">
-						<button type="button" id="topbarCollapse" class="btn btn-info"
+						<button type="button" id="topbarCollapse" class="btn btn-dark"
 							data-toggle="collapse" data-target="#navbarSupportedContent"
 							aria-controls="navbarSupportedContent" aria-expanded="false"
 							aria-label="Toggle navigation">
@@ -138,8 +138,8 @@
 								<li class="nav-item active"><a class="nav-link" href="#">候位管理</a></li>
 								<li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/back-index_m.jsp">主管員工專區</a></li>
 								<li class="nav-item active"><a class="nav-link" href="<%=request.getContextPath()%>/back-end/back-index_e.jsp">一般員工專區</a></li>
-								<li class="nav-item active"><div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; border-radius: 5px; background: #6d7fcc; color: #fff; cursor: pointer;">Log in</div>
-									<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #6d7fcc; color: #fff; cursor: pointer;">Log out</div></li>
+								<li class="nav-item active" style="display: block; padding-top: 0.5rem; padding-bottom: 0.5rem;"><div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log in</div>
+									<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log out</div></li>
 							</ul>
 						</div>
 					</div>
@@ -147,7 +147,7 @@
 			</nav>
 
 			<h5 style="font-weight: 900; display: inline-block;">一般員工專區</h5><span> - 查看通知</span>
-			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #6d7fcc; text-decoration: none; margin-left: 20px;">返回首頁</a>
+			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #dea554; text-decoration: none; margin-left: 20px;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">返回首頁</a>			
 			<p>
 				<table id="table-1">
 					<tr>
