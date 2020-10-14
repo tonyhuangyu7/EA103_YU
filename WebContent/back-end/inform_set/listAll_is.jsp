@@ -13,27 +13,34 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>通知設定管理-listAll_is.jsp</title>
 
-<!-- Bootstrap CSS CDN -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-	integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-	crossorigin="anonymous">
-<!-- Our Custom CSS -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/back-end/css/style2.css">
-<!-- Scrollbar Custom CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-<!-- Font Awesome JS -->
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-	integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-	crossorigin="anonymous"></script>
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-	integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-	crossorigin="anonymous"></script>
+<%
+	Inform_SetService isSvc = new Inform_SetService();
+	List<Inform_SetVO> list = isSvc.getAll();
+	pageContext.setAttribute("list", list);
+%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>
 
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<!-- Our Custom CSS -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/css/style2.css">
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+<!-- Font Awesome JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+<style>
+#table-1, #table-1 td {
+	background: #555;
+    color: #fff;
+	border: 0;
+	width: 100%;
+	border-radius: 5px;
+	text-align: center;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+</style>
 
 </head>
 <body>
@@ -128,41 +135,73 @@
 
 			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定管理</span>
 			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #dea554; text-decoration: none; margin-left: 20px;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">返回首頁</a>			
-			<!-- <ol>
-				<li style="margin-top: 15px;">須守時盡責</li>
-				<li style="margin-top: 15px;">遵顧客至上</li>
-				<li style="margin-top: 15px;">常微笑待人</li>
-				<li style="margin-top: 15px;">要不辭勞苦</li>
-				<li style="margin-top: 15px;">懂臨機應變</li>
-				<li style="margin-top: 15px; margin-bottom: 25px;">熟練鐵沙掌</li>
-			</ol> -->
-			<!-- <div class="line"></div> -->
-			<%-- <h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
-			<div class="leader" style="cursor: default;">
-				<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>EMP0009</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>詹詠祺</span></h4>
-				<!-- random 的員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
-			</div>--%>
+			<p>
+				<table id="table-1">
+					<tr>
+						<td>
+							<h3 style="margin-bottom:0;">查看所有活動通知</h3>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+
+				<table class="table table-hover" style="width: 100%; font-size: 90%;">
+					<thead style="text-align: center;">
+						<tr>
+							<th style="width: 10%;">編號</th>
+							<th style="width: 40%;">內容</th>
+							<th style="width: 20%;">員工</th>
+							<th style="width: 20%;">通知日期</th>
+							<th style="width: 5%;">修改</th>
+							<th style="width: 5%;">刪除</th>
+						</tr>
+					</thead>
+					<%@ include file="page1.file"%>
+					<tbody>
+					<c:forEach var="inform_setVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+						<tr>
+							<td style="text-align: center;">${inform_setVO.is_no}</td>
+							<td style="text-align: center;">${inform_setVO.is_cont}</td>
+							<td style="text-align: center;">${inform_setVO.emp_no} ${pageScope.empSvc.getOneEmp(inform_setVO.emp_no).emp_name}</td>
+							<td style="text-align: center;"><fmt:formatDate value="${inform_setVO.is_date}" pattern="yyyy-MM-dd" /></td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="修改" id="revise" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #8f801d; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#c4b029'" onMouseOut="this.style.background='#8f801d'">
+								<input type="hidden" name="is_no"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action"	value="getOneIsForUpdate"></FORM>
+							</td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
+								<input type="hidden" name="empno"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action" value="deleteIs"></FORM>
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+				<%@ include file="page2.file"%>
+			</p>
 		</div>
 	</div>
 
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<!-- Popper.JS -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 	<!-- Bootstrap JS -->
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-		integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 	<!-- jQuery Custom Scroller CDN -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#sidebar").mCustomScrollbar({
@@ -176,6 +215,5 @@
 			});
 		});
 	</script>
-
 </body>
 </html>

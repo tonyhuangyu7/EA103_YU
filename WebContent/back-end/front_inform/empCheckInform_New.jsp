@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ page import="java.util.*"%>
 <%@ page import="com.front_inform.model.*"%>
 
@@ -9,6 +10,7 @@
 	List<Front_InformVO> list = front_informSvc.getAllInform();
 	pageContext.setAttribute("list", list);
 %>
+<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"></jsp:useBean>
 
 <html>
 <head>
@@ -48,7 +50,6 @@
     color: #fff;
 	border: 0;
 	width: 100%;
-	height: 70;
 	border-radius: 5px;
 	text-align: center;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -152,7 +153,7 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">查看所有通知</h3>
+							<h3 style="margin-bottom:0;">查看所有會員通知</h3>
 						</td>
 					</tr>
 				</table>
@@ -166,18 +167,16 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-
-				<jsp:useBean id="fiSvc" scope="page" class="com.front_inform.model.Front_InformService" />
 				<table class="table table-hover" style="width: 100%; font-size: 90%;">
 					<thead style="text-align: center;">
 						<tr>
-							<th style="width: 10%;">通知編號</th>
-							<th style="width: 10%;">會員編號</th>
+							<th style="width: 10%;">編號</th>
+							<th style="width: 20%;">會員</th>
 							<th style="width: 10%;">訂位編號</th>
 							<th style="width: 20%;">通知內容</th>
 							<th style="width: 20%;">通知日期</th>
-							<th style="width: 15%;">通知狀態</th>
-							<th style="width: 15%;">已讀狀態</th>
+							<th style="width: 10%;">類別</th>
+							<th style="width: 10%;">讀取狀態</th>
 						</tr>
 					</thead>
 					<%@ include file="page1.file"%>
@@ -185,7 +184,7 @@
 					<c:forEach var="front_informVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 						<tr>
 							<td style="text-align: center;">${front_informVO.info_no}</td>
-							<td style="text-align: center;">${front_informVO.mem_no}</td>
+							<td style="text-align: center;">${front_informVO.mem_no} ${pageScope.memSvc.getOneMem(front_informVO.mem_no).mem_name}</td>
 							<td style="text-align: center;">${front_informVO.res_no}</td>
 							<td style="text-align: center;">
 								<c:choose>
@@ -197,8 +196,10 @@
 									<c:when test="${front_informVO.info_cont eq '訂位成功，點選查看訂位明細'}">訂位成功通知</c:when>
 									<c:when test="${front_informVO.info_cont eq '訂餐成功！您尚未付款，點選前往結帳'}">訂餐成功尚未結帳</c:when>
 									<c:when test="${front_informVO.info_cont eq '您已成功付款，點選查看訂單明細'}">訂單付款成功通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '您的訂單已取消'}">訂單取消通知</c:when>
 									<c:when test="${front_informVO.info_cont eq '您的餐點已完成，請至本餐廳取餐'}">取餐通知</c:when>
-									<c:otherwise>當日用餐通知</c:otherwise>
+									<c:when test="${fn:contains(front_informVO.info_cont, '是否確認今日用餐')}">當日用餐通知</c:when>
+									<c:otherwise>活動推播通知</c:otherwise>
 								</c:choose>
 							</td>
 							<td style="text-align: center;"><fmt:formatDate value="${front_informVO.info_date}" pattern="yyyy-MM-dd" /></td>
