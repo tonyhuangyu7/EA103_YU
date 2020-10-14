@@ -23,6 +23,17 @@
 <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
+<style>
+#table-1, #table-1 td {
+	background: #555;
+    color: #fff;
+	border: 0;
+	width: 100%;
+	border-radius: 5px;
+	text-align: center;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+</style>
 
 </head>
 <body>
@@ -147,20 +158,71 @@
 
 			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定管理</span>
 			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #dea554; text-decoration: none; margin-left: 20px;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">返回首頁</a>			
-			<!-- <ol>
-				<li style="margin-top: 15px;">須守時盡責</li>
-				<li style="margin-top: 15px;">遵顧客至上</li>
-				<li style="margin-top: 15px;">常微笑待人</li>
-				<li style="margin-top: 15px;">要不辭勞苦</li>
-				<li style="margin-top: 15px;">懂臨機應變</li>
-				<li style="margin-top: 15px; margin-bottom: 25px;">熟練鐵沙掌</li>
-			</ol> -->
-			<!-- <div class="line"></div> -->
-			<%-- <h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
-			<div class="leader" style="cursor: default;">
-				<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>EMP0009</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>詹詠祺</span></h4>
-				<!-- random 的員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
-			</div>--%>
+			<p>
+				<table id="table-1">
+					<tr>
+						<td>
+							<h3 style="margin-bottom:0;">查詢活動通知</h3>
+						</td>
+					</tr>
+				</table>
+				
+				<br>
+				
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				
+				<ul>
+					<li><a href='<%=request.getContextPath()%>/inform_set/listAll_is.jsp'>List</a> all is.  <br><br></li>
+					<li>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
+							<b>輸入活動通知編號 (如IS0001):</b>
+							<input type="text" name="is_no">
+							<input type="hidden" name="action" value="getOneIsForDisplay">
+							<input type="submit" value="送出">
+						</FORM>
+					</li>
+					<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService" />
+					<li>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
+							<b>選擇活動通知編號:</b>
+							<select size="1" name="is_no">
+								<c:forEach var="inform_setVO" items="${isSvc.all}" > 
+									<option value="${inform_setVO.is_no}">${inform_setVO.is_no}
+								</c:forEach>   
+							</select>
+							<input type="hidden" name="action" value="getOneIsForDisplay">
+							<input type="submit" value="送出">
+						</FORM>
+					</li>
+					<li>
+					<%-- 下面還沒改完!!!!! --%>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
+							<b>選擇員工姓名:</b>
+							<select size="1" name="is_no">
+								<c:forEach var="empVO" items="${empSvc.all}" > 
+									<option value="${empVO.empno}">${empVO.ename}
+								</c:forEach>   
+							</select>
+							<input type="hidden" name="action" value="getOne_For_Display">
+							<input type="submit" value="送出">
+						</FORM>
+					</li>
+				</ul>
+				
+				<h3>員工管理</h3>
+
+				<ul>
+					<li><a href='<%=request.getContextPath()%>/emp/addEmp.jsp'>Add</a> a new Emp.</li>
+				</ul>
+			</p>	
 		</div>
 	</div>
 
