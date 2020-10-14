@@ -79,6 +79,14 @@
 					        <input type="submit" style="display:none"></label>  
 					    </form>
 					</li>
+					
+					<li>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do" style="margin-bottom: 0px;">
+							<input type="submit" value="員工個資修改">
+							<input type="hidden" name="emp_no" value="${empVO2.emp_no}">
+							<input type="hidden" name="action" value="Update_info">
+						</FORM>
+					</li>
 				</ul>
 				
 			</div>
