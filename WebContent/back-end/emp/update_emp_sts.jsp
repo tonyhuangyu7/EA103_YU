@@ -23,12 +23,18 @@
 <title>員工狀態修改</title>
 
 <style>
-
+	#loc{
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		z-index: 10;
+	}
 </style>
 
 </head>
 <body>
 	 
+	 <div id="loc">
 	<h4><a href="select_page.jsp">回首頁</a></h4>
 	<h3>員工狀態修改</h3>
 	
@@ -73,6 +79,9 @@
 
 	<input type="submit" value="送出修改">
 	</FORM>
+	</div>
+	
+	<jsp:include page="/back-end/siderbar/siderbar.jsp" />
 
 </body>
 </html>

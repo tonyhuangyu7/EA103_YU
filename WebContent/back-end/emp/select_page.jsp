@@ -6,16 +6,22 @@
 <title>Emp: Home</title>
 
 <style>
-
+	#loc{
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		z-index: 10;
+	}
 </style>
 
 </head>
 <body>
-
+	
+	<div id="loc">
 	<table id="table-1">
 	   <tr><td><h3>Emp: Home</h3></td></tr>
 	</table>
-	
+				  
 	<h3>資料查詢:</h3>
 	
 	<%-- 錯誤表列 --%>
@@ -75,6 +81,9 @@
 	<ul>
 	  <li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
 	</ul>
+	</div>
+	
+	<jsp:include page="/back-end/siderbar/siderbar.jsp" />
 
 </body>
 </html>

@@ -12,18 +12,20 @@
 <title>員工資料新增</title>
 
 <style>
-	
+	#loc{
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		z-index: 10;
+	}
 </style>
 
 </head>
 <body>
-
-	<table id="table-1">
-		<tr><td>
-			 <h3>員工資料新增</h3></td><td>
-			 <h4><a href="select_page.jsp">回首頁</a></h4>
-		</td></tr>
-	</table>
+	
+	<div id="loc">
+	<h4><a href="select_page.jsp">回主頁</a></h4>
+	<h3>員工資料新增</h3>
 	
 	<h3>資料新增:</h3>
 	
@@ -42,12 +44,25 @@
 		<tr>
 			<td>員工姓名:</td>
 			<td><input type="TEXT" name="emp_name" size="45" 
-				 value="<%= (empVO==null)? "請輸入員工姓名!" : empVO.getEmp_name()%>" /></td>
+				 value="" placeholder="請輸入員工姓名" /></td>
 		</tr>
 	</table>
 	<br>
+	
+	<jsp:useBean id="fun_authSvc" scope="page" class="com.fun_auth.model.Fun_authService" />
+		
+		權限新增:<font color=red><b>*</b></font><br>
+			
+		<c:forEach var="fun_authVO" items="${fun_authSvc.all}">
+			<span class="textcolor"><label><input class="check1" name="fun_no[]" type="checkbox" value="${fun_authVO.fun_no}">${fun_authVO.fun_name}</label></span>
+		</c:forEach>
+	
 	<input type="hidden" name="action" value="insert">
 	<input type="submit" value="送出新增">
 	</FORM>
+	</div>
+	
+	<jsp:include page="/back-end/siderbar/siderbar.jsp" />
+	
 </body>
 </html>

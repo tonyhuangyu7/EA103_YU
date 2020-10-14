@@ -5,6 +5,10 @@
 <%@ page import="com.emp.model.*"%>
 
 <%
+  EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+%>
+
+<%
     EmpService empSvc = new EmpService();
     List<EmpVO> list = empSvc.getAll();
     pageContext.setAttribute("list",list);
@@ -15,13 +19,35 @@
 <title>所有員工資料</title>
 
 <style>
-
+	#loc{
+		position: absolute;
+		top: 150px;
+		left: 300px;
+		z-index: 10;
+	}
 </style>
 
 </head>
 <body>
-	<h4><a href="select_page.jsp">回首頁</a></h4>
+	
+	<div id="loc">
+	<h4><a href="select_page.jsp">回主頁</a></h4>
 	<h3>所有員工資料</h3>
+	
+	<jsp:useBean id="empSvc2" scope="page" class="com.emp.model.EmpService" />
+	
+	<div>
+		<FORM METHOD="post" ACTION="emp.do" >
+	       <b>選擇員工姓名:</b>
+	       <select size="1" name="emp_no">
+	         <c:forEach var="empVO" items="${empSvc2.all}" > 
+	          <option value="${empVO.emp_no}">${empVO.emp_name}
+	         </c:forEach>   
+	       </select>
+	       <input type="hidden" name="action" value="getOne_For_Display">
+	       <input type="submit" value="送出">
+	     </FORM>
+	</div>
 	
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -77,6 +103,9 @@
 		</c:forEach>
 	</table>
 	<%@ include file="page2.file" %>
+	</div>
+	
+	<jsp:include page="/back-end/siderbar/siderbar.jsp" />
 	
 </body>
 </html>

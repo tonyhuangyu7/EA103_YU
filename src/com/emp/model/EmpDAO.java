@@ -30,22 +30,29 @@ private static DataSource ds = null;
 	private static final String GET_ONE_EMP = 
 		"SELECT EMP_NO, EMP_PSW, EMP_NAME, EMP_STS FROM EMPLOYEE WHERE EMP_NO = ?";
 	private static final String GET_ALL_EMP = 
-		"SELECT EMP_NO, EMP_PSW, EMP_NAME, EMP_STS FROM EMPLOYEE ORDER BY EMP_NO";
+		"SELECT EMP_NO, EMP_PSW, EMP_NAME, EMP_STS FROM EMPLOYEE ORDER BY EMP_STS DESC, EMP_NO ASC";
 	
 	@Override
-	public void insert(EmpVO empVO) {
+	public Object insert(EmpVO empVO) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String[] generatedColumns = {"emp_no"};
 		
 		try {
 			
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_EMP);
+			pstmt = con.prepareStatement(INSERT_EMP, generatedColumns);
 			
 			pstmt.setString(1, empVO.getEmp_name());
 			
 			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			rs.next();
+			String emp_no = rs.getString(1);
+			
+			empVO.setEmp_no(emp_no);
 			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -66,7 +73,7 @@ private static DataSource ds = null;
 				}
 			}
 		}
-		
+		return empVO;
 	}
 	
 	@Override

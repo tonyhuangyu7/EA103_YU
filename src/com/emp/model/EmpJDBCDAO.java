@@ -22,44 +22,52 @@ public class EmpJDBCDAO implements EmpDAO_interface {
 		"SELECT EMP_NO, EMP_PSW, EMP_NAME, EMP_STS FROM EMPLOYEE ORDER BY EMP_NO";
 	
 	@Override
-	public void insert(EmpVO empVO) {
+	public Object insert(EmpVO empVO) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String[] generatedColumns = {"emp_no"};
 		
 		try {
 			
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_EMP);
-			
-			pstmt.setString(1, empVO.getEmp_name());
-			
-			pstmt.executeUpdate();
-			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				
+				pstmt = con.prepareStatement(INSERT_EMP, generatedColumns);
+				
+				pstmt.setString(1, empVO.getEmp_name());
+				
+				pstmt.executeUpdate();
+				
+				ResultSet rs = pstmt.getGeneratedKeys();
+				rs.next();
+				String emp_no = rs.getString(1);
+				
+				empVO.setEmp_no(emp_no);
+				
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. "
+						+ e.getMessage());
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
 				}
 			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
+			return empVO;
 	}
 	
 	@Override
