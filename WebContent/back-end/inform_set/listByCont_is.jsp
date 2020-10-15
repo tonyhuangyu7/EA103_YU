@@ -5,16 +5,19 @@
 <%@ page import="com.emp.model.*"%>
 <%@ page import="com.inform_set.model.*"%>
 
-<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService"></jsp:useBean>
-<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定管理-select_is.jsp</title>
+<title>通知設定管理-listAll_is.jsp</title>
+
+<% 
+	List<Inform_SetVO> list = (List<Inform_SetVO>) request.getAttribute("isVOs");
+	pageContext.setAttribute("list", list);
+%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -135,7 +138,7 @@
 										<c:otherwise>
 											<span>${empVO2.emp_no}&nbsp;&nbsp;&nbsp;${empVO2.emp_name}，您好！</span>
 										</c:otherwise>
-									</c:choose>	
+									</c:choose>
 								</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">現場點餐</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">現場劃位</a></li>
@@ -146,10 +149,10 @@
 								<li class="nav-item active" style="display: block; padding-top: 0.5rem; padding-bottom: 0.5rem;">
 									<c:choose>
 										<c:when test="${empVO2.emp_no==null}">
-											<div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';"><a href="<%=request.getContextPath()%>/back-end/emp/login.jsp">Log in</a></div>
+											<div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log in</div>
 										</c:when>
 										<c:otherwise>
-											<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';"><a href="">Log out</a></div>
+											<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log out</div>
 										</c:otherwise>
 									</c:choose>
 								</li>
@@ -165,13 +168,11 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">查詢活動通知</h3>
+							<h3 style="margin-bottom:0;">查看所有活動通知</h3>
 						</td>
 					</tr>
 				</table>
-				
 				<br>
-				
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
@@ -181,78 +182,42 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				
-				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listAll_is.jsp'>List</a> all is.<br><br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入活動通知編號 (如IS0001):</b>
-							<input type="text" name="is_no">
-							<input type="hidden" name="action" value="getOneIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入員工編號 (例如EMP0001):</b>
-							<input type="text" name="emp_no">
-							<input type="hidden" name="action" value="getIsForDisplayByEmp">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入關鍵字(例如快來吃Pot吧):</b>
-							<input type="text" name="is_cont">
-							<input type="hidden" name="action" value="getIsForDisplayByCont">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					
-					<%-- <li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇員工:</b>
-							<select size="1" name="emp_no">
-								<c:forEach var="isVO" items="${isSvc.all}">
-									<option value="${isVO.emp_no}">${isVO.emp_no}&nbsp;&nbsp;&nbsp;${pageScope.empSvc.getOneEmp(isVO.emp_no).emp_name}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getIsForDisplayByEmp">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇活動通知編號:</b>
-							<select size="1" name="is_no">
-								<c:forEach var="inform_setVO" items="${isSvc.all}" > 
-									<option value="${inform_setVO.is_no}">${inform_setVO.is_no}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getOneIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇員工姓名:</b>
-							<select size="1" name="is_no">
-								<c:forEach var="empVO" items="${empSvc.all}" > 
-									<option value="${empVO.empno}">${empVO.ename}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getOne_For_Display">
-							<input type="submit" value="送出">
-						</FORM>
-					</li> --%>
-				</ul>
-				
-				<h3>員工管理</h3>
 
-				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
-				</ul>
-			</p>	
+				<table class="table table-hover" style="width: 100%; font-size: 90%;">
+					<thead style="text-align: center;">
+						<tr>
+							<th style="width: 10%;">編號</th>
+							<th style="width: 40%;">內容</th>
+							<th style="width: 20%;">員工</th>
+							<th style="width: 20%;">通知日期</th>
+							<th style="width: 5%;"></th>
+							<th style="width: 5%;"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="inform_setVO" items="${list}">
+						<tr>
+							<td style="text-align: center;">${inform_setVO.is_no}</td>
+							<td style="text-align: center;">${inform_setVO.is_cont}</td>
+							<td style="text-align: center;">${inform_setVO.emp_no} ${pageScope.empSvc.getOneEmp(inform_setVO.emp_no).emp_name}</td>
+							<td style="text-align: center;"><fmt:formatDate value="${inform_setVO.is_date}" pattern="yyyy-MM-dd" /></td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="修改" id="revise" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #8f801d; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#c4b029'" onMouseOut="this.style.background='#8f801d'">
+								<input type="hidden" name="is_no"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action"	value="getOneIsForUpdate"></FORM>
+							</td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
+								<input type="hidden" name="empno"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action" value="deleteIs"></FORM>
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</p>
 		</div>
 	</div>
 

@@ -11,11 +11,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定管理-listMany_is.jsp</title>
+<title>通知設定管理-listAll_is.jsp</title>
 
 <%
-	Inform_SetService isSvc = new Inform_SetService();
-	List<Inform_SetVO> list = isSvc.getAll();
+	Inform_SetService front_informSvc = new Inform_SetService();
+	List<Inform_SetVO> list = front_informSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
 <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>

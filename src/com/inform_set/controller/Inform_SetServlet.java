@@ -35,9 +35,9 @@ public class Inform_SetServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String is_no = req.getParameter("is_no").trim();
+				String is_no = req.getParameter("is_no").trim().toUpperCase();
 				String is_noReg = "I{1}S{1}[\\d]{4}";
-				Pattern pat = Pattern.compile(is_noReg, Pattern.CASE_INSENSITIVE);
+				Pattern pat = Pattern.compile(is_noReg);
 				Matcher matcher = pat.matcher(is_no.trim());
 				if(is_no==null||(is_no.length()==0)) {
 					errorMsgs.add("請輸入通知設定編號");
@@ -76,38 +76,38 @@ public class Inform_SetServlet extends HttpServlet {
 			}
 			
 		}
-		
-		if("getAllIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
-			
-			List<String> errorMsgs = new LinkedList<String>();
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				Inform_SetService isSvc = new Inform_SetService();
-				List<Inform_SetVO> isVOs = isSvc.getAll();
-				if (isVOs == null) {
-					errorMsgs.add("查無資料");
-				}
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
-				/***************************2.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("isVOs", isVOs); // 資料庫取出的isVO物件,存入req
-				String url = "/back-end/inform_set/listMany_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
-				successView.forward(req, res);
-				
-			}catch(Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
-				failureView.forward(req, res);
-			}
-			
-		}
+//		
+//		if("getAllIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
+//			
+//			List<String> errorMsgs = new LinkedList<String>();
+//			req.setAttribute("errorMsgs", errorMsgs);
+//			
+//			try {
+//				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+//				Inform_SetService isSvc = new Inform_SetService();
+//				List<Inform_SetVO> isVOs = isSvc.getAll();
+//				if (isVOs == null) {
+//					errorMsgs.add("查無資料");
+//				}
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
+//				
+//				/***************************2.查詢完成,準備轉交(Send the Success view)*************/
+//				req.setAttribute("isVOs", isVOs); // 資料庫取出的isVO物件,存入req
+//				String url = "/back-end/inform_set/listMany_is.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
+//				successView.forward(req, res);
+//				
+//			}catch(Exception e) {
+//				errorMsgs.add("無法取得資料:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+//				failureView.forward(req, res);
+//			}
+//			
+//		}
 		
 		if("getIsForDisplayByEmp".equals(action)) { // 來自 select_is.jsp 的請求
 			
@@ -116,15 +116,25 @@ public class Inform_SetServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String emp_no = req.getParameter("emp_no").trim();
-				String emp_noReg = "E{1}M{1}P{1}[\\\\d]{4}";
-				Pattern pat = Pattern.compile(emp_noReg, Pattern.CASE_INSENSITIVE);
+				String emp_no = req.getParameter("emp_no").trim().toUpperCase();
+				String emp_noReg = "E{1}M{1}P{1}[\\d]{4}";
+				Pattern pat = Pattern.compile(emp_noReg);
 				Matcher matcher = pat.matcher(emp_no.trim());
 				if(emp_no==null||(emp_no.length()==0)) {
 					errorMsgs.add("請輸入員工編號");
 				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 				if(!matcher.find()) {
 					errorMsgs.add("員工編號格式不正確");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+					failureView.forward(req, res);
+					return;
 				}
 				EmpService empSvc = new EmpService();
 				EmpVO empVO = empSvc.getOneEmp(emp_no);
@@ -151,8 +161,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listMany_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
+				String url = "/back-end/inform_set/listByEmp_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByEmp_is.jsp
 				successView.forward(req, res);
 				
 			} catch(Exception e) {
@@ -164,6 +174,7 @@ public class Inform_SetServlet extends HttpServlet {
 		}
 		
 		if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
+			// Q:如何讓特殊符號無法進入成功轉交頁面?
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -179,6 +190,14 @@ public class Inform_SetServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
+//				if(is_cont == "!" || is_cont == "?") {
+//					errorMsgs.add("請輸入非特殊符號之關鍵字");
+//				}
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
 				
 				/***************************2.開始查詢資料*****************************************/
 				Inform_SetService isSvc = new Inform_SetService();
@@ -194,8 +213,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listMany_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
+				String url = "/back-end/inform_set/listByCont_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByCont_is.jsp
 				successView.forward(req, res);
 				
 			} catch(Exception e) {
@@ -430,6 +449,7 @@ public class Inform_SetServlet extends HttpServlet {
 		}
 		
 		if("getOneIsForUpdate".equals(action)) { // 來自 listMany_is.jsp、listOne_is.jsp 的請求
+			// Q：如何在發生錯誤時跳回來源頁面? 使用 form 表單提交的頁面，有辦法跳回去嗎?
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -446,19 +466,8 @@ public class Inform_SetServlet extends HttpServlet {
 					errorMsgs.add("此通知時效已過期，無法予以修改");
 				}
 				if (!errorMsgs.isEmpty()) {
-					HttpSession session = req.getSession();
-					try {                                                        
-						String location = (String) session.getAttribute("location");
-						if (location != null) {
-							// 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-							session.removeAttribute("location");
-							res.sendRedirect(location); 
-							return;
-						}
-					}catch (Exception ignored) {
-					}
-					// 無來源網頁 : 重導至select_is.jsp
-					res.sendRedirect(req.getContextPath()+"/back-end/inform_set/select_is.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+					failureView.forward(req, res);
 					return;
 				}
 								
@@ -471,18 +480,8 @@ public class Inform_SetServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch(Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				HttpSession session = req.getSession();
-				try {                                                        
-					String location = (String) session.getAttribute("location");
-					if (location != null) {
-						// 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-						session.removeAttribute("location");
-						res.sendRedirect(location);            
-						return;
-					}
-				}catch (Exception ignored) { }
-				// 無來源網頁 : 重導至select_is.jsp
-				res.sendRedirect(req.getContextPath()+"/back-end/inform_set/select_is.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+				failureView.forward(req, res);
 			}
 		}
 		

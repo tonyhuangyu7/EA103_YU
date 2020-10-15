@@ -5,6 +5,11 @@
 <%@ page import="com.emp.model.*"%>
 <%@ page import="com.inform_set.model.*"%>
 
+<%
+	Inform_SetVO isVO = (Inform_SetVO) request.getAttribute("isVO");
+%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +116,6 @@
 						<div id="titleSmall" style="padding-left: 10px; font-size: 30px; font-weight: 800;"><a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp">吃 Pot 吧！員工專區</a></div>
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="nav navbar-nav ml-auto">
-								<!-- 員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
 								<li class="nav-item active"><a class="nav-link" href="#"
 									id="empId" style="cursor: default;">
 									<c:choose>
@@ -147,20 +151,48 @@
 
 			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定管理</span>
 			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #dea554; text-decoration: none; margin-left: 20px;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">返回首頁</a>			
-			<!-- <ol>
-				<li style="margin-top: 15px;">須守時盡責</li>
-				<li style="margin-top: 15px;">遵顧客至上</li>
-				<li style="margin-top: 15px;">常微笑待人</li>
-				<li style="margin-top: 15px;">要不辭勞苦</li>
-				<li style="margin-top: 15px;">懂臨機應變</li>
-				<li style="margin-top: 15px; margin-bottom: 25px;">熟練鐵沙掌</li>
-			</ol> -->
-			<!-- <div class="line"></div> -->
-			<%-- <h3 style="font-weight: 900; display: inline-block;">當日領班</h3>
-			<div class="leader" style="cursor: default;">
-				<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>EMP0009</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>詹詠祺</span></h4>
-				<!-- random 的員工編號 ${empVO.emp_no}  員工姓名 ${empVO.emp_name} -->
-			</div>--%>
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<ul>
+					<c:forEach var="message" items="${errorMsgs}">
+						<li style="color: red">${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			<table class="table table-hover" style="width: 100%; font-size: 90%;">
+				<thead style="text-align: center;">
+					<tr>
+						<th style="width: 10%;">編號</th>
+						<th style="width: 40%;">內容</th>
+						<th style="width: 20%;">員工</th>
+						<th style="width: 20%;">通知日期</th>
+						<th style="width: 5%;"></th>
+						<th style="width: 5%;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: center;"><%=isVO.getIs_no()%></td>
+						<td><%=isVO.getIs_cont()%></td>
+						<td style="text-align: center;"><%=isVO.getEmp_no()%> ${pageScope.empSvc.getOneEmp(isVO.emp_no).emp_name}</td>
+						<td style="text-align: center;"><%=isVO.getIs_date()%></td>
+						<td style="text-align: center;">
+							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="修改" id="revise" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #8f801d; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#c4b029'" onMouseOut="this.style.background='#8f801d'">
+								<input type="hidden" name="is_no"  value="<%=isVO.getIs_no()%>">
+								<input type="hidden" name="action"	value="getOneIsForUpdate">
+							</FORM>
+						</td>
+						<td style="text-align: center;">
+							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
+								<input type="hidden" name="empno"  value="<%=isVO.getIs_no()%>">
+								<input type="hidden" name="action" value="deleteIs">
+							</FORM>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
