@@ -132,7 +132,7 @@ public class Front_informServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getMyInform".equals(action)) { // 會員以其身分登入網站頁面後執行此動作
+		if ("getMyInform".equals(action)) { // 會員以其身分登入網站頁面後要直接執行此動作一次
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);

@@ -228,6 +228,7 @@
 									<c:when test="${front_informVO.info_cont eq '訂餐成功！您尚未付款，點選前往結帳'}">訂餐成功尚未結帳</c:when>
 									<c:when test="${front_informVO.info_cont eq '您已成功付款，點選查看訂單明細'}">訂單付款成功通知</c:when>
 									<c:when test="${front_informVO.info_cont eq '您的訂單已取消'}">訂單取消通知</c:when>
+									<c:when test="${front_informVO.info_cont eq '您的訂位已取消'}">訂位取消通知</c:when>
 									<c:when test="${front_informVO.info_cont eq '您的餐點已完成，請至本餐廳取餐'}">取餐通知</c:when>
 									<c:when test="${fn:contains(front_informVO.info_cont, '是否確認今日用餐')}">當日用餐通知</c:when>
 									<c:otherwise>活動推播通知</c:otherwise>
