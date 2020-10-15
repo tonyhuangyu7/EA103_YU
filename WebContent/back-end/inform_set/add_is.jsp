@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定管理-select_is.jsp</title>
+<title>通知設定管理-add_is.jsp</title>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -162,7 +162,7 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">查詢活動通知</h3>
+							<h3 style="margin-bottom:0;">新增活動通知</h3>
 						</td>
 					</tr>
 				</table>
@@ -179,16 +179,8 @@
 					</ul>
 				</c:if>
 				
-				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listMany_is.jsp'>List</a> all is.  <br><br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>列出所有活動通知:</b>
-							<input type="text" name="is_no">
-							<input type="hidden" name="action" value="getAllIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>
+				<%--<ul>
+					<li><a href='<%=request.getContextPath()%>/inform_set/listAll_is.jsp'>List</a> all is.  <br><br></li>
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>輸入活動通知編號 (如IS0001):</b>
@@ -196,8 +188,8 @@
 							<input type="hidden" name="action" value="getOneIsForDisplay">
 							<input type="submit" value="送出">
 						</FORM>
-					</li>
-					<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService" />
+					</li> --%>
+				<%--<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService" />
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>選擇活動通知編號:</b>
@@ -209,9 +201,8 @@
 							<input type="hidden" name="action" value="getOneIsForDisplay">
 							<input type="submit" value="送出">
 						</FORM>
-					</li>
-					<li>
-					<%-- 下面還沒改完!!!!! --%>
+					</li> --%>
+				<%--<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>選擇員工姓名:</b>
 							<select size="1" name="is_no">
@@ -228,8 +219,8 @@
 				<h3>員工管理</h3>
 
 				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
-				</ul>
+					<li><a href='<%=request.getContextPath()%>/emp/addEmp.jsp'>Add</a> a new Emp.</li>
+				</ul> --%>
 			</p>	
 		</div>
 	</div>

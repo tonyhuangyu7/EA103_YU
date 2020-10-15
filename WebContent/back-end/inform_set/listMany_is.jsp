@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定管理-listAll_is.jsp</title>
+<title>通知設定管理-listMany_is.jsp</title>
 
 <%
 	Inform_SetService isSvc = new Inform_SetService();
@@ -191,8 +191,8 @@
 							<th style="width: 40%;">內容</th>
 							<th style="width: 20%;">員工</th>
 							<th style="width: 20%;">通知日期</th>
-							<th style="width: 5%;">修改</th>
-							<th style="width: 5%;">刪除</th>
+							<th style="width: 5%;"></th>
+							<th style="width: 5%;"></th>
 						</tr>
 					</thead>
 					<%@ include file="page1.file"%>
