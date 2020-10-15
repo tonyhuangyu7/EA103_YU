@@ -119,8 +119,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listByEmp_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByEmp_is.jsp
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
 				successView.forward(req, res);
 				
 			} catch(Exception e) {
@@ -162,8 +162,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listByCont_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByCont_is.jsp
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
 				successView.forward(req, res);
 				
 			} catch(Exception e) {
@@ -221,8 +221,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listByDate_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByDate_is.jsp
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -385,8 +385,8 @@ public class Inform_SetServlet extends HttpServlet {
 				
 				/***************************2.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
-				String url = "/back-end/inform_set/listByComplex_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listByComplex_is.jsp
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -397,8 +397,7 @@ public class Inform_SetServlet extends HttpServlet {
 			}
 		}
 		
-		if("getOneIsForUpdate".equals(action)) {
-			// 來自 listAll_is.jsp、listOne_is.jsp、listByEmp_is.jsp、listByCont_is.jsp、listByDate_is.jsp 或 listByComplex_is.jsp 的請求
+		if("getOneIsForUpdate".equals(action)) { // 來自 listMany_is.jsp、listOne_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -583,8 +582,8 @@ public class Inform_SetServlet extends HttpServlet {
 				isVO = isSvc.addIs(emp_no, is_cont, is_date);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/inform_set/listAll_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAll_is.jsp
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listMany_is.jsp
 				successView.forward(req, res);	
 				
 			}catch(Exception e) {
@@ -595,8 +594,7 @@ public class Inform_SetServlet extends HttpServlet {
 			
 		}
 		
-		if("deleteIs".equals(action)) { 
-			// 來自 listAll_is.jsp、listOne_is.jsp、listByEmp_is.jsp、listByCont_is.jsp、listByDate_is.jsp 或 listByComplex_is.jsp 的請求
+		if("deleteIs".equals(action)) { // 來自 listMany_is.jsp、listOne_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
