@@ -77,6 +77,38 @@ public class Inform_SetServlet extends HttpServlet {
 			
 		}
 		
+		if("getAllIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				Inform_SetService isSvc = new Inform_SetService();
+				List<Inform_SetVO> isVOs = isSvc.getAll();
+				if (isVOs == null) {
+					errorMsgs.add("查無資料");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/***************************2.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("isVOs", isVOs); // 資料庫取出的isVO物件,存入req
+				String url = "/back-end/inform_set/listMany_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listMany_is.jsp
+				successView.forward(req, res);
+				
+			}catch(Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
 		if("getIsForDisplayByEmp".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
@@ -409,7 +441,6 @@ public class Inform_SetServlet extends HttpServlet {
 				/***************************2.開始查詢資料，進行可能的錯誤處理****************************************/
 				Inform_SetService isSvc = new Inform_SetService();
 				Inform_SetVO isVO = isSvc.getOneIs(is_no);
-				
 				java.util.Date nowTime = new java.util.Date();
 				if(isVO.getIs_date().before(nowTime)) {
 					errorMsgs.add("此通知時效已過期，無法予以修改");
@@ -421,10 +452,11 @@ public class Inform_SetServlet extends HttpServlet {
 						if (location != null) {
 							// 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 							session.removeAttribute("location");
-							res.sendRedirect(location);            
+							res.sendRedirect(location); 
 							return;
 						}
-					}catch (Exception ignored) { }
+					}catch (Exception ignored) {
+					}
 					// 無來源網頁 : 重導至select_is.jsp
 					res.sendRedirect(req.getContextPath()+"/back-end/inform_set/select_is.jsp");
 					return;
