@@ -36,7 +36,7 @@ public class Inform_SetServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String is_no = req.getParameter("is_no").trim();
-				String is_noReg = "I{1}S{1}[\\\\d]{4}";
+				String is_noReg = "I{1}S{1}[\\d]{4}";
 				Pattern pat = Pattern.compile(is_noReg, Pattern.CASE_INSENSITIVE);
 				Matcher matcher = pat.matcher(is_no.trim());
 				if(is_no==null||(is_no.length()==0)) {
