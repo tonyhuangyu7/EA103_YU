@@ -180,15 +180,7 @@
 				</c:if>
 				
 				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listMany_is.jsp'>List</a> all is.  <br><br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>列出所有活動通知:</b>
-							<input type="text" name="is_no">
-							<input type="hidden" name="action" value="getAllIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>
+					<li><a href='<%=request.getContextPath()%>/inform_set/listAll_is.jsp'>List</a> all is.  <br><br></li>
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>輸入活動通知編號 (如IS0001):</b>
@@ -228,7 +220,7 @@
 				<h3>員工管理</h3>
 
 				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
+					<li><a href='<%=request.getContextPath()%>/emp/addEmp.jsp'>Add</a> a new Emp.</li>
 				</ul>
 			</p>	
 		</div>
