@@ -151,6 +151,7 @@
 
 			<h5 style="font-weight: 900; display: inline-block;">主管員工專區</h5><span> - 通知設定管理</span>
 			<a href="<%=request.getContextPath()%>/back-end/back-index_New.jsp" style="display: inline-block; font-size: 8px; font-weight: 900; color: #dea554; text-decoration: none; margin-left: 20px;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">返回首頁</a>			
+			
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
 				<ul>
@@ -159,15 +160,17 @@
 					</c:forEach>
 				</ul>
 			</c:if>
+			
+			<%-- data table --%>
 			<table class="table table-hover" style="width: 100%; font-size: 90%;">
 				<thead style="text-align: center;">
 					<tr>
 						<th style="width: 10%;">編號</th>
-						<th style="width: 40%;">內容</th>
+						<th style="width: 35%;">內容</th>
 						<th style="width: 20%;">員工</th>
 						<th style="width: 20%;">通知日期</th>
 						<th style="width: 5%;"></th>
-						<th style="width: 5%;"></th>
+						<th style="width: 10%;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -185,10 +188,11 @@
 						</td>
 						<td style="text-align: center;">
 							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
-								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
-								<input type="hidden" name="empno"  value="<%=isVO.getIs_no()%>">
-								<input type="hidden" name="action" value="deleteIs">
-							</FORM>
+							 <%--<button id="del${isVO.is_no}" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'" onclick="confirmDel('${isVO.is_no}')">刪除</button> --%>
+								 <input type="submit" value="刪除" id="del${isVO.is_no}" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
+								 <input type="hidden" name="is_no"  value="<%=isVO.getIs_no()%>">
+								 <input type="hidden" name="action" value="deleteIs">
+							 </FORM>
 						</td>
 					</tr>
 				</tbody>
@@ -216,6 +220,26 @@
 				$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 			});
 		});
+		
+		<%-- 想做...click 刪除事件 --%>
+		//function confirmDel(is_no){
+		//	alert("是否確定刪除");
+		//	$.ajax({
+		//		 url:'is.do',
+		//		 method:"POST",
+		//		 dataType:"json",
+		//		 data:{
+		//			 action: 'deleteIs',
+		//			 is_no: is_no,
+		//		 },
+		//		 success:function(res){
+		//			 alert("刪除完畢");
+		//		 },
+		//		 error:function(err){
+		//			 
+		//		 },	
+		//	});
+		//}
 	</script>
 </body>
 </html>

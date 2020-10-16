@@ -212,7 +212,7 @@
 							<td>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
 								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
-								<input type="hidden" name="empno"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="is_no"  value="${inform_setVO.is_no}">
 								<input type="hidden" name="action" value="deleteIs"></FORM>
 							</td>
 						</tr>
