@@ -328,7 +328,7 @@ th, td {
 	</div>
 	<script src="<%=request.getContextPath()%>/front-end/js/jquery.min.js"></script>
 	<script>
-		var mem_no="<%=request.getParameter("mem_no")%>";
+		var mem_no="<%=request.getParameter("mem_no")%>"
 		
 		if(document.getElementsByName("unread").length > 0){
 			document.getElementsByClassName("badge")[0].style.display = "inline-block";

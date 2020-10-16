@@ -5,18 +5,19 @@
 <%@ page import="com.emp.model.*"%>
 <%@ page import="com.inform_set.model.*"%>
 
-<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService"></jsp:useBean>
-<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>通知設定管理-select_is.jsp</title>
+<title>通知設定管理-listAll_is.jsp</title>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<% 
+	List<Inform_SetVO> list = (List<Inform_SetVO>) request.getAttribute("isVOs");
+	pageContext.setAttribute("list", list);
+%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService"></jsp:useBean>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -137,7 +138,7 @@
 										<c:otherwise>
 											<span>${empVO2.emp_no}&nbsp;&nbsp;&nbsp;${empVO2.emp_name}，您好！</span>
 										</c:otherwise>
-									</c:choose>	
+									</c:choose>
 								</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">現場點餐</a></li>
 								<li class="nav-item active"><a class="nav-link" href="#">現場劃位</a></li>
@@ -148,10 +149,10 @@
 								<li class="nav-item active" style="display: block; padding-top: 0.5rem; padding-bottom: 0.5rem;">
 									<c:choose>
 										<c:when test="${empVO2.emp_no==null}">
-											<div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';"><a href="<%=request.getContextPath()%>/back-end/emp/login.jsp">Log in</a></div>
+											<div id="topLogIn" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log in</div>
 										</c:when>
 										<c:otherwise>
-											<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';"><a href="">Log out</a></div>
+											<div id="topLogOut" style="display: inline-block; width: 90px; text-align: center; margin-left: 10px; border-radius: 5px; background: #424242; color: #ccc; cursor: pointer;" onMouseOver="this.style.color='#fff'; this.style.background='#000';" onMouseOut="this.style.color='#ccc'; this.style.background='#424242';">Log out</div>
 										</c:otherwise>
 									</c:choose>
 								</li>
@@ -167,13 +168,11 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">查詢活動通知</h3>
+							<h3 style="margin-bottom:0;">查看所有活動通知</h3>
 						</td>
 					</tr>
 				</table>
-				
 				<br>
-				
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
@@ -183,98 +182,45 @@
 						</c:forEach>
 					</ul>
 				</c:if>
-				
-				<ul>
-					
-					<%-- listAll_is.jsp --%>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listAll_is.jsp'>List</a> all is.<br><br></li>
-					
-					<%-- listOne_is.jsp --%>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入活動通知編號 (如IS0001)：</b>
-							<input type="text" name="is_no">
-							<input type="hidden" name="action" value="getOneIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					
-					<%-- listByEmp_is.jsp --%>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入員工編號 (例如EMP0001)：</b>
-							<input type="text" name="emp_no">
-							<input type="hidden" name="action" value="getIsForDisplayByEmp">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					
-					<%-- listByCont_is.jsp --%>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入關鍵字(例如快來吃Pot吧)：</b>
-							<input type="text" name="is_cont">
-							<input type="hidden" name="action" value="getIsForDisplayByCont">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
-					
-					<%-- 下方尚未完成 --%>
-					<%-- listByDate_is.jsp --%>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do">
-							<b>選擇發送日期：</b>
-							<b>起 </b><input type="text" id="is_date_startDate" name="is_date_startDate">
-							<b>訖 </b><input type="text" id="is_date_stopDate" name="is_date_stopDate">
-							<%-- <button onclick="findByDate()">送出</button> --%>
-							<input type="hidden" name="action" value="getIsForDisplayByDate">
-							<input type="submit" value="送出">
-						</FORM>
-					<br></li>
 
-					<%-- listByComplex_is.jsp --%>
-					<%-- <li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<input type="text" name="is_no">
-							<input type="text" name="emp_no">
-							<input type="text" name="is_cont">
-							<input type="text" name="is_date">
-							<input type="hidden" name="action" value="getIsForDisplayByComplex">
-							<input type="submit" value="多條件查詢">
-						</FORM>
-					<br></li> --%>
-					<%-- <li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇員工:</b>
-							<select size="1" name="emp_no">
-								<c:forEach var="isVO" items="${isSvc.all}">
-									<option value="${isVO.emp_no}">${isVO.emp_no}&nbsp;&nbsp;&nbsp;${pageScope.empSvc.getOneEmp(isVO.emp_no).emp_name}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getIsForDisplayByEmp">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>--%>
-				</ul>
-				<table id="table-1">
-					<tr>
-						<td>
-							<h3 style="margin-bottom:0;">新增活動通知</h3>
-						</td>
-					</tr>
+				<table class="table table-hover" style="width: 100%; font-size: 90%;">
+					<thead style="text-align: center;">
+						<tr>
+							<th style="width: 10%;">編號</th>
+							<th style="width: 40%;">內容</th>
+							<th style="width: 20%;">員工</th>
+							<th style="width: 20%;">通知日期</th>
+							<th style="width: 5%;"></th>
+							<th style="width: 5%;"></th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach var="inform_setVO" items="${list}">
+						<tr>
+							<td style="text-align: center;">${inform_setVO.is_no}</td>
+							<td style="text-align: center;">${inform_setVO.is_cont}</td>
+							<td style="text-align: center;">${inform_setVO.emp_no} ${pageScope.empSvc.getOneEmp(inform_setVO.emp_no).emp_name}</td>
+							<td style="text-align: center;"><fmt:formatDate value="${inform_setVO.is_date}" pattern="yyyy-MM-dd" /></td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="修改" id="revise" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #8f801d; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#c4b029'" onMouseOut="this.style.background='#8f801d'">
+								<input type="hidden" name="is_no"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action"	value="getOneIsForUpdate"></FORM>
+							</td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" style="margin-bottom: 0px;">
+								<input type="submit" value="刪除" id="del" style="border: 1px solid #c8a97e; border-radius: 5px; color: #fff; background: #6b2822; cursor: pointer;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);" onMouseOver="this.style.background='#ba2214'" onMouseOut="this.style.background='#6b2822'">
+								<input type="hidden" name="is_no"  value="${inform_setVO.is_no}">
+								<input type="hidden" name="action" value="deleteIs"></FORM>
+							</td>
+						</tr>
+					</c:forEach>
+					</tbody>
 				</table>
-				<br>
-				<%-- listByCont_is.jsp --%>
-				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
-				</ul>
-			</p>	
+			</p>
 		</div>
 	</div>
 
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<!-- Popper.JS -->
@@ -295,57 +241,6 @@
 				$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 			});
 		});
-		$( function() {
-			var dateFormat = "mm/dd/yy",
-			from = $( "#is_date_startDate" ).datepicker({
-				defaultDate: "+1w",
-				changeMonth: true,
-				numberOfMonths: 1
-			}).on( "change", function() {
-				to.datepicker( "option", "minDate", getDate( this ) );
-			}),
-			to = $( "#is_date_stopDate" ).datepicker({
-				defaultDate: "+1w",
-				changeMonth: true,
-				numberOfMonths: 1
-			}).on( "change", function() {
-				from.datepicker( "option", "maxDate", getDate( this ) );
-			});
-		 
-			function getDate( element ) {
-				var date;
-				try {
-					date = $.datepicker.parseDate( dateFormat, element.value );
-				} catch( error ) {
-					date = null;
-				}
-				return date;
-			}
-		});
-		<%-- 從這裡開始應該有錯...F12 畫面說 404...QQ
-		var is_date_startDate = document.getElementById('is_date_startDate').value;
-		var is_date_stopDate = document.getElementById('is_date_stopDate').value;
-		var startArr = new Array();
-		startArr = is_date_startDate.split("/");
-		is_date_startDate = startArr[2]+'-'+startArr[0]+'-'+startArr[1];
-		var stopArr = new Array();
-		stopArr = is_date_stopDate.split("/");
-		is_date_stopDate = stopArr[2]+'-'+stopArr[0]+'-'+stopArr[1];
-		function findByDate(is_date_startDate,is_date_stopDate){
-			$.ajax({
-				url:'<%=request.getContextPath()%>/inform_set/is.do',
-				method:"POST",
-				dataType:"json",
-				data:{
-					action: 'getIsForDisplayByDate',
-					is_date_startDate: is_date_startDate,
-					is_date_stopDate: is_date_stopDate
-				},
-				success:function(res){
-				},
-				error:function(err){console.log(err)}, 
-			});     
-		} --%>
 	</script>
 </body>
 </html>
