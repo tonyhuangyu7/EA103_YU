@@ -1,6 +1,7 @@
 package com.inform_set.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -238,13 +239,13 @@ if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-		if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
+if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
 				/***************************1.接收請求參數****************************************/
+				// 起始日期
 				String startDate = req.getParameter("is_date_startDate").trim();
 				if (startDate == null || startDate.length() == 0) {
 					errorMsgs.add("請輸入起始日期");
@@ -254,15 +255,12 @@ if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 					failureView.forward(req, res);
 					return;
 				}
-				java.sql.Date is_date_startDate = null;
-				try {
-					is_date_startDate = java.sql.Date.valueOf(req.getParameter("is_date_startDate").trim());
-				} catch (IllegalArgumentException e) {
-					is_date_startDate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入起始日期");
-				}
+				// 修改傳入字串，將字串由 mm/dd/yyyy 改為 yyyy-mm-dd
+				String[] startDateArr = startDate.split("/");
+				startDate = startDateArr[2]+'-'+startDateArr[0]+'-'+startDateArr[1];
 				
-				String stopDate = req.getParameter("is_date_startDate").trim();
+				// 結束日期
+				String stopDate = req.getParameter("is_date_stopDate").trim();
 				if (stopDate == null || stopDate.length() == 0) {
 					errorMsgs.add("請輸入結束日期");
 				}
@@ -271,28 +269,14 @@ if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 					failureView.forward(req, res);
 					return;
 				}
-				java.sql.Date is_date_stopDate = null;
-				try {
-					is_date_stopDate = java.sql.Date.valueOf(req.getParameter("is_date_stopDate").trim());
-				} catch (IllegalArgumentException e) {
-					is_date_stopDate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入結束日期");
-				}
-				
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/select_is.jsp");
-					failureView.forward(req, res);
-					return;
-				}
+				// 修改傳入字串，將字串由 mm/dd/yyyy 改為 yyyy-mm-dd
+				String[] stopDateArr = stopDate.split("/");
+				stopDate = stopDateArr[2]+'-'+stopDateArr[0]+'-'+stopDateArr[1];
 				
 				/***************************2.參數轉型、開始查詢資料****************************************/
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				startDate = sdf.format(is_date_startDate);
-				stopDate = sdf.format(is_date_stopDate);
-				
 				Inform_SetService isSvc = new Inform_SetService();
 				List<Inform_SetVO> isVOs = isSvc.getIsByDate(startDate, stopDate);
-				if (isVOs == null) {
+				if (isVOs.isEmpty()) {
 					errorMsgs.add("查無資料");
 				}
 				if (!errorMsgs.isEmpty()) {
@@ -300,7 +284,6 @@ if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 					failureView.forward(req, res);
 					return;
 				}
-				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("isVOs", isVOs); // 資料庫取出的 isVOs ,存入req
 				String url = "/back-end/inform_set/listByDate_is.jsp";

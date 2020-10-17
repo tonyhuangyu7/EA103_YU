@@ -434,7 +434,7 @@ public class Inform_SetJDBCDAO implements Inform_SetDAO_interface{
 		System.out.println("-----------------------------------------------------------------------------------");
 
 		// 查詢 by Date (test1)
-		List<Inform_SetVO> list3 = dao.findByDate("2020-10-20", "2020-10-20");
+		List<Inform_SetVO> list3 = dao.findByDate("2020-10-15", "2020-10-31");
 		for(Inform_SetVO aisVO : list3) {
 			System.out.print(aisVO.getIs_no() + ", ");
 			System.out.print(aisVO.getIs_cont() + ", ");

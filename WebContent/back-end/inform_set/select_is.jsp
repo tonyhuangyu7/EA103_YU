@@ -224,8 +224,8 @@
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do">
 							<b>選擇發送日期：</b>
-							<b>起 </b><input type="text" id="is_date_startDate" name="is_date_startDate">
-							<b>訖 </b><input type="text" id="is_date_stopDate" name="is_date_stopDate">
+							<b>起 </b><input type="text" id="is_date_startDate" name="is_date_startDate" class="hasDatepicker2">
+							<b>訖 </b><input type="text" id="is_date_stopDate" name="is_date_stopDate" class="hasDatepicker2">
 							<%-- <button onclick="findByDate()">送出</button> --%>
 							<input type="hidden" name="action" value="getIsForDisplayByDate">
 							<input type="submit" value="送出">
