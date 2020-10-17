@@ -219,14 +219,12 @@
 						</FORM>
 					<br></li>
 					
-					<%-- 下方尚未完成 --%>
 					<%-- listByDate_is.jsp --%>
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do">
 							<b>選擇發送日期：</b>
 							<b>起 </b><input type="text" id="is_date_startDate" name="is_date_startDate" class="hasDatepicker2">
 							<b>訖 </b><input type="text" id="is_date_stopDate" name="is_date_stopDate" class="hasDatepicker2">
-							<%-- <button onclick="findByDate()">送出</button> --%>
 							<input type="hidden" name="action" value="getIsForDisplayByDate">
 							<input type="submit" value="送出">
 						</FORM>
@@ -243,6 +241,7 @@
 							<input type="submit" value="多條件查詢">
 						</FORM>
 					<br></li> --%>
+					<%-- 想用員工 select，但會跑出多筆相同資料 --%>
 					<%-- <li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>選擇員工:</b>
@@ -322,30 +321,6 @@
 				return date;
 			}
 		});
-		<%-- 從這裡開始應該有錯...F12 畫面說 404...QQ
-		var is_date_startDate = document.getElementById('is_date_startDate').value;
-		var is_date_stopDate = document.getElementById('is_date_stopDate').value;
-		var startArr = new Array();
-		startArr = is_date_startDate.split("/");
-		is_date_startDate = startArr[2]+'-'+startArr[0]+'-'+startArr[1];
-		var stopArr = new Array();
-		stopArr = is_date_stopDate.split("/");
-		is_date_stopDate = stopArr[2]+'-'+stopArr[0]+'-'+stopArr[1];
-		function findByDate(is_date_startDate,is_date_stopDate){
-			$.ajax({
-				url:'<%=request.getContextPath()%>/inform_set/is.do',
-				method:"POST",
-				dataType:"json",
-				data:{
-					action: 'getIsForDisplayByDate',
-					is_date_startDate: is_date_startDate,
-					is_date_stopDate: is_date_stopDate
-				},
-				success:function(res){
-				},
-				error:function(err){console.log(err)}, 
-			});     
-		} --%>
 	</script>
 </body>
 </html>

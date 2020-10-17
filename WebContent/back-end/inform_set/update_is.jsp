@@ -5,6 +5,11 @@
 <%@ page import="com.emp.model.*"%>
 <%@ page import="com.inform_set.model.*"%>
 
+<%
+	Inform_SetVO isVO = (Inform_SetVO) request.getAttribute("isVO");
+%>
+<jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +38,14 @@
 	text-align: center;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
+</style>
+<style>
+	.xdsoft_datetimepicker .xdsoft_datepicker {
+		width:  300px;   /* width:  300px; */
+	}
+	.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+		height: 151px;   /* height:  151px; */
+	}
 </style>
 
 </head>
@@ -162,7 +175,7 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">修改活動通知</h3>
+							<h3 style="margin-bottom:0;">修改活動通知設定</h3>
 						</td>
 					</tr>
 				</table>
@@ -179,52 +192,57 @@
 					</ul>
 				</c:if>
 				
-				<%--<ul>
-					<li><a href='<%=request.getContextPath()%>/inform_set/listAll_is.jsp'>List</a> all is.  <br><br></li>
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>輸入活動通知編號 (如IS0001):</b>
-							<input type="text" name="is_no">
-							<input type="hidden" name="action" value="getOneIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					</li> --%>
-				<%--<jsp:useBean id="isSvc" scope="page" class="com.inform_set.model.Inform_SetService" />
-					<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇活動通知編號:</b>
-							<select size="1" name="is_no">
-								<c:forEach var="inform_setVO" items="${isSvc.all}" > 
-									<option value="${inform_setVO.is_no}">${inform_setVO.is_no}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getOneIsForDisplay">
-							<input type="submit" value="送出">
-						</FORM>
-					</li> --%>
-				<%--<li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇員工姓名:</b>
-							<select size="1" name="is_no">
-								<c:forEach var="empVO" items="${empSvc.all}" > 
-									<option value="${empVO.empno}">${empVO.ename}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getOne_For_Display">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>
-				</ul>
-				
-				<h3>員工管理</h3>
-
-				<ul>
-					<li><a href='<%=request.getContextPath()%>/emp/addEmp.jsp'>Add</a> a new Emp.</li>
-				</ul> --%>
+				<FORM METHOD="post" ACTION="is.do" name="form1">
+					<table class="table table-hover" style="width: 100%; font-size: 90%;">
+						<tr>
+							<td>通知編號:<font color=red><b>*</b></font></td>
+							<td><%=isVO.getIs_no()%></td>
+						</tr>
+						<tr>
+							<td>員工編號:</td>
+							<c:choose>
+								<c:when test="${empVO2.emp_no==null}">
+									<td><input type="TEXT" name="emp_no" size="45"	value="<%=isVO.getEmp_no()%>" /></td>
+								</c:when>
+								<c:otherwise>
+									<td><input type="TEXT" name="emp_no" size="45" value="${empVO2.emp_no}"/></td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+						<tr>
+							<td>通知內容:</td>
+							<td><input type="TEXT" name="is_cont" size="45" value="<%=isVO.getIs_cont()%>" /></td>
+						</tr>
+						<tr>
+							<td>通知日期:</td>
+							<td><input  type="TEXT" name="is_date" id="f_date1"/></td>
+						</tr>
+					</table>
+					<br>
+					<input type="hidden" name="action" value="updateIs"/>
+					<input type="hidden" name="is_no" value="<%=isVO.getIs_no()%>"/>
+					<input type="submit" value="送出修改"/>
+				</FORM>
 			</p>	
 		</div>
 	</div>
 
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"/>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	
+	<script>
+	 	$.datetimepicker.setLocale('zh');
+		$('#f_date1').datetimepicker({
+			theme: 'dark',              //theme: 'dark',
+			timepicker:false,       //timepicker:true,
+			step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+			format:'Y-m-d',         //format:'Y-m-d H:i:s',
+			value: '<%=isVO.getIs_date()%>',
+			minDate:new Date() // 去除今日(不含)之前
+		});
+	</script>
+	
 	<!-- jQuery CDN - Slim version (=without AJAX) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<!-- Popper.JS -->
@@ -246,5 +264,6 @@
 			});
 		});
 	</script>
+
 </body>
 </html>
