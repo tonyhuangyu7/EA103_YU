@@ -1,7 +1,6 @@
 package com.inform_set.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +31,7 @@ public class Inform_SetServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-if("getOneIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
+		if("getOneIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -86,7 +85,7 @@ if("getOneIsForDisplay".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-if("getIsForDisplayByEmp".equals(action)) { // 來自 select_is.jsp 的請求
+		if("getIsForDisplayByEmp".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -150,7 +149,7 @@ if("getIsForDisplayByEmp".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
+		if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -239,7 +238,7 @@ if("getIsForDisplayByCont".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
+		if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -299,7 +298,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-		if("getIsForDisplayByComplex".equals(action)) { // 來自 select_is.jsp 的請求
+if("getIsForDisplayByComplex".equals(action)) { // 來自 select_is.jsp 的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -338,7 +337,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 				// 到此程式尚未 return 代表已可確定該期間有資料
 				
 				// 取得員工編號參數
-				String emp_no = req.getParameter("emp_no").trim();
+				String emp_no = req.getParameter("emp_no").trim().toUpperCase();
 				List<Inform_SetVO> step3isVOs = null; 
 				// 預備一個 List 去放置符合員工編號及模糊查詢的結果，最後再與藉由日期所查詢到的 step1isVOs 做比較
 				
@@ -346,7 +345,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 				// 有輸入員工編號
 				if(emp_no!=null && (emp_no.length()!=0)) { 
 					String emp_noReg = "E{1}M{1}P{1}[\\d]{4}";
-					Pattern pat = Pattern.compile(emp_noReg, Pattern.CASE_INSENSITIVE);
+					Pattern pat = Pattern.compile(emp_noReg);
 					Matcher matcher = pat.matcher(emp_no.trim());
 					if(!matcher.find()) {
 						errorMsgs.add("員工編號格式不正確");
@@ -462,7 +461,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			}
 		}
 		
-		if("getOneIsForUpdate".equals(action)) { 
+	if("getOneIsForUpdate".equals(action)) { 
 			// 來自 listAll_is.jsp、listByCont_is.jsp、listByComplex_is.jsp、listByDate_is.jsp、listByEmp_is.jsp、listOne_is.jsp 的請求
 			// Q：如何在發生錯誤時及成功轉交時，跳回來源頁面? 使用 form 表單提交的頁面，有辦法跳回去嗎?
 			
@@ -500,7 +499,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			}
 		}
 		
-		if ("updateIs".equals(action)) { // 來自update_is.jsp的請求
+	if("updateIs".equals(action)) { // 來自update_is.jsp的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -509,9 +508,9 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String is_no = req.getParameter("is_no").trim();
 				
-				String emp_no = req.getParameter("emp_no").trim();
+				String emp_no = req.getParameter("emp_no").trim().toUpperCase();
 				String emp_noReg = "E{1}M{1}P{1}[\\d]{4}";
-				Pattern pat = Pattern.compile(emp_noReg, Pattern.CASE_INSENSITIVE);
+				Pattern pat = Pattern.compile(emp_noReg);
 				Matcher matcher = pat.matcher(emp_no.trim());
 				if(emp_no==null||(emp_no.length()==0)) {
 					errorMsgs.add("請輸入員工編號");
@@ -573,25 +572,27 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			}
 		}
 		
-		if("insertIs".equals(action)) { // 來自add_is.jsp的請求  
-			
+	if("insertIs".equals(action)) { // 來自add_is.jsp的請求  
+
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				String emp_no = req.getParameter("emp_no").trim();
-				String emp_noReg = "E{1}M{1}P{1}[\\d]{4}";
-				Pattern pat = Pattern.compile(emp_noReg, Pattern.CASE_INSENSITIVE);
-				Matcher matcher = pat.matcher(emp_no.trim());
+				String emp_no = req.getParameter("emp_no").trim().toUpperCase();
 				if(emp_no==null||(emp_no.length()==0)) {
 					errorMsgs.add("請輸入員工編號");
 				}
+				
+				String emp_noReg = "E{1}M{1}P{1}[\\d]{4}";
+				Pattern pat = Pattern.compile(emp_noReg);
+				Matcher matcher = pat.matcher(emp_no.trim());
 				if(!matcher.find()) {
 					errorMsgs.add("員工編號格式不正確");
 				}
+				
 				EmpService empSvc = new EmpService();
-				EmpVO empVO = empSvc.getOneEmp(emp_no);
+				EmpVO empVO = empSvc.getOneEmp(emp_no.toUpperCase());
 				if (empVO == null) {
 					errorMsgs.add("查無員工資料");
 				}
@@ -617,20 +618,14 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 				isVO.setIs_cont(is_cont);
 				isVO.setIs_date(is_date);
 				
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/inform_set/add_is.jsp");
-					failureView.forward(req, res);
-					return;
-				}
-				
 				/***************************2.開始新增資料***************************************/
 				Inform_SetService isSvc = new Inform_SetService();
 				isVO = isSvc.addIs(emp_no, is_cont, is_date);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("isVO", isVO);
-				String url = "/back-end/inform_set/listOne_is.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listOne_is.jsp
+				String url = "/back-end/inform_set/listAll_is.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAll_is.jsp
 				successView.forward(req, res);	
 				
 			}catch(Exception e) {
@@ -641,7 +636,7 @@ if("getIsForDisplayByDate".equals(action)) { // 來自 select_is.jsp 的請求
 			
 		}
 		
-		if("deleteIs".equals(action)) { 
+	if("deleteIs".equals(action)) { 
 			// 來自 listAll_is.jsp、listByCont_is.jsp、listByComplex_is.jsp、listByEmp_is.jsp、listByDate_is.jsp、listOne_is.jsp 的請求
 			// Q：如何在發生錯誤時及成功轉交時，跳回來源頁面? 使用 form 表單提交的頁面，有辦法跳回去嗎?
 			

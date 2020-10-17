@@ -263,7 +263,7 @@
 					</tr>
 				</table>
 				<br>
-				<%-- listByCont_is.jsp --%>
+				<%-- add_is.jsp --%>
 				<ul>
 					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
 				</ul>

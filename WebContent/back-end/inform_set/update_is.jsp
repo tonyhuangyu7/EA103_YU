@@ -227,17 +227,17 @@
 		</div>
 	</div>
 
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css"/>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css"/>
+	<script src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
 	
 	<script>
 	 	$.datetimepicker.setLocale('zh');
 		$('#f_date1').datetimepicker({
-			theme: 'dark',              //theme: 'dark',
-			timepicker:false,       //timepicker:true,
-			step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-			format:'Y-m-d',         //format:'Y-m-d H:i:s',
+			theme: 'dark',
+			timepicker:false,
+			step: 1,
+			format:'Y-m-d',
 			value: '<%=isVO.getIs_date()%>',
 			minDate:new Date() // 去除今日(不含)之前
 		});
