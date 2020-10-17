@@ -354,11 +354,12 @@ th, td {
 			}
 			
 			// 已讀未讀顯示顏色
-			let readColor = document.getElementsByName("read");
+			
+			let readColor = document.querySelectorAll('[name="	read"]');
 			for(let i=0; i<readColor.length ;i++){
 				readColor[i].style.backgroundColor = "#fff"; 
 			}
-			let unreadColor = document.getElementsByName("unread");
+			let unreadColor = document.querySelectorAll('[name="unread"]');
 			for(let i=0; i<unreadColor.length ;i++){
 				unreadColor[i].style.backgroundColor = "#e6f9ff"; 
 				unreadColor[i].setAttribute('name','read');
@@ -371,7 +372,7 @@ th, td {
 			$.ajax({
 				 url:'fi.do',
 				 method:"POST",
-				 dataType:"json",
+				 dataType:"text",
 				 data:{
 					 action: 'updateReadSts',
 					 mem_no: mem_no,
@@ -385,10 +386,12 @@ th, td {
 			$.ajax({
 				 url:'fi.do',
 				 method:"POST",
-				 dataType:"json",
+				 dataType:"text",
 				 data:{
 					 action: 'updateSts',
 					 info_no: info_no,
+					 mem_no: mem_no,
+					 res_no: res_no,
 					 checkYes: 'checkYes'
 				 },
 				 success:function(res){
@@ -401,10 +404,12 @@ th, td {
 			$.ajax({
 				 url:'fi.do',
 				 method:"POST",
-				 dataType:"json",
+				 dataType:"text",
 				 data:{
 					 action: 'updateSts',
 					 info_no: info_no,
+					 mem_no: mem_no,
+					 res_no: res_no,
 					 checkNo: 'checkNo'
 				 },
 				 success:function(res){

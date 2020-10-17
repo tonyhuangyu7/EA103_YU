@@ -2,7 +2,6 @@ package com.front_inform.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.front_inform.model.Front_InformService;
 import com.front_inform.model.Front_InformVO;
@@ -92,7 +92,10 @@ public class Front_informServlet extends HttpServlet {
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+//			登入頁面要做的
+//			HttpSession session = req.getSession();
+//			session.setAttribute("mem_no", "XXX");
+//			System.out.println(session.getAttribute("mem_no"));
 			try {
 				String mem_no = req.getParameter("mem_no");
 				if(mem_no==null||(mem_no.trim().length()==0)) {
