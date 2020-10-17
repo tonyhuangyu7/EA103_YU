@@ -199,8 +199,8 @@
 							<td><input type="TEXT" name="emp_no" size="45"	value="<%=(isVO==null)? "EMP0001" : isVO.getEmp_no()%>"/></td>
 						</tr>
 						<tr>
-							<td>通知內容:<font color=red><b>*</b></font></td>
-							<td><input type="TEXT" name="is_cont" size="45" value="<%=(isVO==null)? "請確實填寫" : isVO.getIs_cont()%>"/></td>
+							<td>通知內容:<font color=red><b>*</b></font></td><br>
+							<td><textarea style="width:400px;height:100px;" name="is_cont" value="<%=(isVO==null)? "" : isVO.getIs_cont()%>" placeholder="請輸入5字以上、60字以下之內容"></textarea></td>
 						</tr>
 						<tr>
 							<td>通知日期:<font color=red><b>*</b></font></td>

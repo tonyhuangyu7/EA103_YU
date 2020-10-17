@@ -199,7 +199,7 @@
 							<td><%=isVO.getIs_no()%></td>
 						</tr>
 						<tr>
-							<td>員工編號:</td>
+							<td>員工編號:<font color=red><b>*</b></font></td>
 							<c:choose>
 								<c:when test="${empVO2.emp_no==null}">
 									<td><input type="TEXT" name="emp_no" size="45"	value="<%=isVO.getEmp_no()%>" /></td>
@@ -210,11 +210,11 @@
 							</c:choose>
 						</tr>
 						<tr>
-							<td>通知內容:</td>
-							<td><input type="TEXT" name="is_cont" size="45" value="<%=isVO.getIs_cont()%>" /></td>
+							<td>通知內容:<font color=red><b>*</b></font></td><br>
+							<td><textarea style="width:400px;height:100px;" name="is_cont" value="<%=isVO.getIs_cont()%>"></textarea></td>
 						</tr>
 						<tr>
-							<td>通知日期:</td>
+							<td>通知日期:<font color=red><b>*</b></font></td>
 							<td><input  type="TEXT" name="is_date" id="f_date1"/></td>
 						</tr>
 					</table>
