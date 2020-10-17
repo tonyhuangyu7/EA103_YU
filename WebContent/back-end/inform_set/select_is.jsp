@@ -230,13 +230,10 @@
 						</FORM>
 					<br></li>
 
+					<%-- 以上尚需改版成下方之多條件查詢 --%>
 					<%-- listByComplex_is.jsp --%>
 					<%-- <li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<input type="text" name="is_no">
-							<input type="text" name="emp_no">
-							<input type="text" name="is_cont">
-							<input type="text" name="is_date">
 							<input type="hidden" name="action" value="getIsForDisplayByComplex">
 							<input type="submit" value="多條件查詢">
 						</FORM>
