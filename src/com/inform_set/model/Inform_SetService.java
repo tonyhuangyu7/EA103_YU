@@ -55,6 +55,10 @@ public class Inform_SetService {
 		return dao.findByDate(startDate, stopDate);
 	}
 	
+	public List<Inform_SetVO> getIsByComplex(String is_no, String emp_no, String[] is_cont, String startDate, String stopDate){
+		return dao.findByComplex(is_no, emp_no, is_cont, startDate, stopDate);
+	}
+	
 	public List<Inform_SetVO> getAll() {
 		return dao.getAll();
 	}
