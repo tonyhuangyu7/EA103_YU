@@ -167,59 +167,46 @@
 				<table id="table-1">
 					<tr>
 						<td>
-							<h3 style="margin-bottom:0;">查詢活動通知</h3>
+							<h3 style="margin-bottom:0;">查詢所有活動通知</h3>
 						</td>
 					</tr>
 				</table>
-				
 				<br>
-				
-				<%-- 錯誤表列 --%>
-				<c:if test="${not empty errorMsgs}">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-				
 				<ul>
-					
 					<%-- listAll_is.jsp --%>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listAll_is.jsp'>List</a> all is.<br><br></li>
+					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/listAll_is.jsp' style="color: #dea554; font-weight: 600;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">顯示所有活動通知</a><br><br></li>
 					
 					<%-- listOne_is.jsp --%>
-					<li>
+					<%-- <li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>輸入活動通知編號 (如IS0001)：</b>
 							<input type="text" name="is_no">
 							<input type="hidden" name="action" value="getOneIsForDisplay">
 							<input type="submit" value="送出">
 						</FORM>
-					<br></li>
+					<br></li> --%>
 					
 					<%-- listByEmp_is.jsp --%>
-					<li>
+					<%-- <li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>輸入員工編號 (例如EMP0001)：</b>
 							<input type="text" name="emp_no">
 							<input type="hidden" name="action" value="getIsForDisplayByEmp">
 							<input type="submit" value="送出">
 						</FORM>
-					<br></li>
+					<br></li> --%>
 					
 					<%-- listByCont_is.jsp --%>
-					<li>
+					<%-- <li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
 							<b>輸入關鍵字(例如快來吃Pot吧)：</b>
 							<input type="text" name="is_cont">
 							<input type="hidden" name="action" value="getIsForDisplayByCont">
 							<input type="submit" value="送出">
 						</FORM>
-					<br></li>
+					<br></li> --%>
 					
-					<%-- listByDate_is.jsp --%>
+					<%-- listByDate_is.jsp
 					<li>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do">
 							<b>選擇發送日期：</b>
@@ -228,33 +215,57 @@
 							<input type="hidden" name="action" value="getIsForDisplayByDate">
 							<input type="submit" value="送出">
 						</FORM>
-					<br></li>
-
-					<%-- listByComplex_is.jsp --%>
-					<%-- <li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<input type="text" name="is_no">
-							<input type="text" name="emp_no">
-							<input type="text" name="is_cont">
-							<input type="text" name="is_date">
-							<input type="hidden" name="action" value="getIsForDisplayByComplex">
-							<input type="submit" value="多條件查詢">
-						</FORM>
 					<br></li> --%>
-					<%-- 想用員工 select，但會跑出多筆相同資料 --%>
-					<%-- <li>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
-							<b>選擇員工:</b>
-							<select size="1" name="emp_no">
-								<c:forEach var="isVO" items="${isSvc.all}">
-									<option value="${isVO.emp_no}">${isVO.emp_no}&nbsp;&nbsp;&nbsp;${pageScope.empSvc.getOneEmp(isVO.emp_no).emp_name}
-								</c:forEach>   
-							</select>
-							<input type="hidden" name="action" value="getIsForDisplayByEmp">
-							<input type="submit" value="送出">
-						</FORM>
-					</li>--%>
 				</ul>
+				
+				<%-- 查詢通知 --%>
+				<table id="table-1">
+					<tr>
+						<td><h3 style="margin-bottom:0;">動態查詢活動通知</h3></td>
+					</tr>
+				</table>
+				<br>
+				<%-- 錯誤表列 --%>
+				<c:if test="${not empty errorMsgs}">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+					<br>
+				</c:if>
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/inform_set/is.do" >
+					<span style="position: relative; left: 4%; font-weight: 600;">可自由輸入欲查詢之條件</span><br><br>
+					<ul>
+						<li>
+							<b>輸入活動通知編號 (如IS0001)：</b>
+							<input type="text" name="is_no">
+						<br><br></li>
+						<li>
+							<b>輸入員工編號 (例如EMP0001)：</b>
+							<input type="text" name="emp_no">
+						<br><br></li>
+						<li>
+							<b>輸入關鍵字(例如快來吃Pot吧)：</b>
+							<input type="text" name="is_cont">
+						<br><br></li>
+						<li>
+							<b>選擇發送日期：</b>
+							<b>起 </b><input type="text" id="is_date_startDate" name="is_date_startDate" class="hasDatepicker2">
+							<b>訖 </b><input type="text" id="is_date_stopDate" name="is_date_stopDate" class="hasDatepicker2"><br>
+							<br><span> ( 提醒您：若未確實填寫日期，則將查詢由「開店日」至「今日」的活動通知內容 ) </span>
+						<br></li>
+					</ul>
+					<div style="display: inline-block; position: relative; left: 5%;">
+						<input type="hidden" name="action" value="getIsForDisplayByComplex">
+						<input type="submit" value="動態查詢" style="margin-right: 20px;">
+						<input type="reset" value="重新填寫">
+					</div>
+				</FORM>
+				<br>
+				
+				<%-- 新增通知 --%>
 				<table id="table-1">
 					<tr>
 						<td>
@@ -265,7 +276,7 @@
 				<br>
 				<%-- add_is.jsp --%>
 				<ul>
-					<li><a href='<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp'>Add</a> a new Emp.</li>
+					<li><a href="<%=request.getContextPath()%>/back-end/inform_set/add_is.jsp" style="color: #dea554; font-weight: 600;" onMouseOver="this.style.color='#ffbc5e';" onMouseOut="this.style.color='#dea554';">新增通知設定</a></li>
 				</ul>
 			</p>	
 		</div>
